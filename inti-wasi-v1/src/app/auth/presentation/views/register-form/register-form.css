@@ -1,0 +1,127 @@
+/* ===== CONTENEDOR GENERAL ===== */
+.register-container {
+  width: 100%;
+  min-height: 100vh;
+  background-image: url("/assets/images/bg-login.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  display: flex;
+  flex-direction: column;
+
+  border: 6px solid #0e4a57;
+  box-sizing: border-box;
+
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* ===== HEADER ===== */
+.header {
+  background-color: #f5a623;
+  padding: 18px 40px;
+  border-bottom: 4px solid #0e4a57;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 36px;
+  font-weight: 700;
+  color: #111;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.35);
+}
+
+/* ===== CARD ===== */
+.register-card {
+  width: 85%;
+  max-width: 1250px;
+  height: 530px;
+
+  background-color: #ffffff;
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.25);
+
+  margin: 55px auto 60px auto;
+  display: flex;
+}
+
+/* ===== COLUMNA IZQUIERDA (Imagen grande) ===== */
+.register-left {
+  width: 50%;
+  height: 100%;
+}
+
+.register-left img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ===== COLUMNA DERECHA (Formulario) ===== */
+.register-right {
+  width: 50%;
+  padding: 50px 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.register-right h2 {
+  color: #1684a7;
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 35px;
+  text-align: center;
+}
+
+
+.half {
+  width: 50%;
+}
+
+.input-field {
+  width: 100%;
+  margin: 8px 0;
+  padding: 14px 20px;
+  border-radius: 26px;
+  border: 1.5px solid #2d3e50;
+  margin-bottom: 20px;
+  font-size: 15px;
+}
+
+.input-field::placeholder {
+  color: #777;
+}
+
+/* ===== Botón ===== */
+.btn-register {
+  background-color: #0e698a;
+  border: none;
+  color: white;
+  padding: 12px 48px;
+  border-radius: 22px;
+  cursor: pointer;
+  margin: 10px auto;
+  font-size: 16px;
+  display: block;
+}
+
+.btn-register:hover {
+  background-color: #0b5871;
+}
+
+/* ===== TEXTO ENLACE ===== */
+.login-text {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.login-link {
+  color: #0e698a;
+  text-decoration: none;
+  margin-left: 4px;
+}
+
+.login-link:hover {
+  text-decoration: underline;
+}

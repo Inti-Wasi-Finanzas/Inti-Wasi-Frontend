@@ -1,0 +1,47 @@
+<div class="login-container">
+
+  <header class="header">
+    <h1>Inti Wasi</h1>
+  </header>
+
+  <div class="login-card">
+
+    <!-- Left side: Form -->
+    <div class="login-left">
+      <h2>Iniciar Sesion</h2>
+
+      <form>
+
+        <input
+          type="text"
+          placeholder="Nombre de usuario"
+          class="input-field"
+        />
+
+        <input
+          type="password"
+          placeholder="Contraseña"
+          class="input-field"
+        />
+
+        <button type="submit" class="btn-login">
+          Iniciar Sesion
+        </button>
+
+        <p class="register-text">
+          No tienes una cuenta?
+          <a routerLink="/auth/register" class="register-link">Registrar</a>
+        </p>
+      </form>
+    </div>
+
+    <!-- Right side: Image -->
+    <div class="login-right">
+      <img
+        src="/assets/images/login-illustration.png"
+        alt="Imagen de inicio de sesión"
+      />
+    </div>
+  </div>
+
+</div>

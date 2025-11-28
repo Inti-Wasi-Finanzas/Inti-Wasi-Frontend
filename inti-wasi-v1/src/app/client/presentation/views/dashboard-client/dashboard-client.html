@@ -1,0 +1,59 @@
+<div class="dashboard-container">
+  <!-- NAVBAR SUPERIOR -->
+  <header class="navbar">
+    <div class="navbar-left">
+      <span class="logo-text">Inti Wasi</span>
+    </div>
+
+    <nav class="navbar-center">
+      <a routerLink="/client/profile" class="nav-link">Cliente</a>
+      <a routerLink="/client/simulation-create" class="nav-link">Nueva Simulación</a>
+      <a routerLink="/client/my-simulations" class="nav-link">Simulaciones Guardadas</a>
+    </nav>
+
+    <div class="navbar-right">
+      <button class="logout-btn" routerLink="/auth/login">
+        <mat-icon>logout</mat-icon>
+      </button>
+    </div>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="dashboard-main">
+    <div class="overlay-panel">
+      <h1 class="title">¡Consigue tu vivienda ya!</h1>
+
+      <div class="cards-container">
+        <!-- CARD 1 -->
+        <article class="card">
+          <div class="card-icon">
+            <mat-icon>account_circle</mat-icon>
+          </div>
+          <h3>Perfil del cliente</h3>
+          <p>Gestiona tu información personal</p>
+          <button class="btn-ir" routerLink="/client/profile">Ir</button>
+        </article>
+
+        <!-- CARD 2 -->
+        <article class="card">
+          <div class="card-icon">
+            <mat-icon>settings</mat-icon>
+          </div>
+          <h3>Nueva Simulación</h3>
+          <p>Genera cálculos de financiamiento personalizados</p>
+          <button class="btn-ir" routerLink="/client/simulation-create">Ir</button>
+        </article>
+
+        <!-- CARD 3 -->
+        <article class="card">
+          <div class="card-icon">
+            <mat-icon>save</mat-icon>
+          </div>
+          <h3>Simulaciones Guardadas</h3>
+          <p>Accede y compara tus simulaciones anteriores</p>
+          <button class="btn-ir" routerLink="/client/my-simulations">Ir</button>
+        </article>
+      </div>
+    </div>
+  </main>
+</div>
