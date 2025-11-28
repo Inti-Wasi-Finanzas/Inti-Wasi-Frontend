@@ -1,1 +1,95 @@
-<p>my-simulations works!</p>
+<div class="saved-container">
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="navbar-left">
+      <span class="logo-text" routerLink="/client">Inti Wasi</span>
+    </div>
+
+    <nav class="navbar-center">
+      <a routerLink="/client/profile" class="nav-link">Cliente</a>
+      <a routerLink="/client/simulation-create" class="nav-link">
+        Nueva Simulación
+      </a>
+      <a routerLink="/client/my-simulations" class="nav-link active">
+        Simulaciones Guardadas
+      </a>
+    </nav>
+
+    <div class="navbar-right">
+      <button class="logout-btn" routerLink="/auth/login">
+        <mat-icon>logout</mat-icon>
+      </button>
+    </div>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="saved-main">
+    <section class="saved-panel">
+      <div class="saved-card">
+
+        <table class="saved-table">
+          <thead>
+          <tr>
+            <th>Nombre completo</th>
+            <th>DNI</th>
+            <th>Teléfono</th>
+            <th>Ingresos</th>
+            <th>Estado</th>
+            <th class="actions-header">Acciones</th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <tr *ngFor="let sim of simulations">
+            <td>{{ sim.fullName }}</td>
+            <td>{{ sim.dni }}</td>
+            <td>{{ sim.phoneNumber }}</td>
+            <td>S/ {{ sim.monthlyIncome | number : '1.0-2' }}</td>
+            <td>
+                <span
+                  class="status-pill"
+                  [ngClass]="getStatusClass(sim.status)"
+                >
+                  {{ getStatusLabel(sim.status) }}
+                </span>
+            </td>
+            <td class="actions-cell">
+              <button
+                type="button"
+                class="icon-btn edit-btn"
+                (click)="onEdit(sim)"
+                title="Editar simulación"
+              >
+                ✏️
+              </button>
+              <button
+                type="button"
+                class="icon-btn delete-btn"
+                (click)="onDelete(sim)"
+                title="Eliminar simulación"
+              >
+                🗑️
+              </button>
+            </td>
+          </tr>
+
+          <tr *ngIf="simulations.length === 0">
+            <td colspan="6" class="empty-row">
+              No hay simulaciones guardadas.
+            </td>
+          </tr>
+          </tbody>
+        </table>
+
+        <!-- Paginación (placeholder, luego lo conectas de verdad) -->
+        <div class="pagination">
+          <button type="button" class="page-arrow" disabled>◀</button>
+          <span class="page-info">Página 1 de 1</span>
+          <button type="button" class="page-arrow" disabled>▶</button>
+        </div>
+
+      </div>
+    </section>
+  </main>
+</div>

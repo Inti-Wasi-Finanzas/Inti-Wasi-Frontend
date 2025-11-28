@@ -1,0 +1,320 @@
+/* ===========================
+   LAYOUT GENERAL
+   =========================== */
+
+.simulation-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f3f6fb;
+}
+
+/* Fondo con imagen (similar al dashboard) */
+.simulation-main {
+  flex: 1;
+  background-image: url('/assets/images/bg-finanzas.png');
+  background-size: cover;
+  background-position: center;
+  padding: 24px 32px 40px;
+}
+
+/* Panel central tipo "tarjeta" de vidrio */
+.simulation-panel {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.simulation-card {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 16px;
+  padding: 28px 30px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+  border: 2px solid #0084ff;
+}
+
+.simulation-inner {
+  display: flex;
+  gap: 28px;
+  align-items: flex-start;
+}
+
+/* ===========================
+   NAVBAR SUPERIOR
+   =========================== */
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 32px;
+  background-color: #f7a721;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.navbar-left .logo-text {
+  font-size: 26px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.navbar-center {
+  display: flex;
+  gap: 32px;
+}
+
+.nav-link {
+  font-size: 16px;
+  text-decoration: none;
+  color: #000;
+  padding: 6px 12px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.nav-link:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.nav-link.active {
+  background-color: #000;
+  color: #fff;
+}
+
+.navbar-right .logout-btn {
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* ===========================
+   FORMULARIO (IZQUIERDA)
+   =========================== */
+
+.form-section {
+  flex: 0 0 60%;
+}
+
+.section-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 18px;
+  margin-top: 12px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Campos que ocupan todo el ancho (títulos) */
+.form-subtitle-full {
+  grid-column: 1 / -1;
+}
+
+.form-subtitle {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 16px 0 4px;
+  color: #333;
+}
+
+/* Inputs / selects del formulario */
+.input-field {
+  width: 100%;
+  padding: 9px 11px;
+  border-radius: 6px;
+  border: 1px solid #c5ccd8;
+  background-color: #ffffff;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input-field:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.15);
+}
+
+.simulate-button-container {
+  margin-top: 18px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-simulate {
+  padding: 11px 24px;
+  background-color: #007bff;
+  color: #ffffff;
+  border-radius: 20px;
+  border: none;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-simulate:hover {
+  background-color: #005fcc;
+  transform: translateY(-1px);
+}
+
+/* ===========================
+   RESUMEN (DERECHA)
+   =========================== */
+
+.summary-section {
+  flex: 0 0 40%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.summary-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.btn-save {
+  background-color: #20b356;
+  color: #ffffff;
+  border: none;
+  padding: 9px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-save:hover {
+  background-color: #199046;
+  transform: translateY(-1px);
+}
+
+/* Caja del resumen (estilo profesional) */
+.summary-box {
+  background-color: #f3f8ff;
+  border-radius: 14px;
+  border: 1.5px solid #007bff;
+  padding: 20px 22px 18px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Lista de filas del resumen */
+.summary-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+/* Cada fila: label + campo alineados horizontalmente */
+.summary-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.summary-label {
+  flex: 0 0 52%;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Campos del resumen (solo lectura) */
+.result-field {
+  flex: 0 0 48%;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #d0d5dd;
+  background-color: #eef1f6;
+  font-size: 14px;
+  color: #555;
+}
+
+/* Botones debajo del resumen */
+.summary-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.btn-pdf-schedule,
+.btn-pdf-export {
+  flex: 1;
+  padding: 10px 12px;
+  border-radius: 20px;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: filter 0.15s ease, transform 0.1s ease;
+}
+
+.btn-pdf-schedule {
+  background-color: #9ad93a;
+}
+
+.btn-pdf-export {
+  background-color: #e78d21;
+}
+
+.btn-pdf-schedule:hover,
+.btn-pdf-export:hover {
+  filter: brightness(0.95);
+  transform: translateY(-1px);
+}
+
+/* ===========================
+   RESPONSIVE
+   =========================== */
+
+@media (max-width: 1024px) {
+  .simulation-inner {
+    flex-direction: column;
+  }
+
+  .form-section,
+  .summary-section {
+    flex: 1 1 auto;
+  }
+
+  .summary-section {
+    margin-top: 18px;
+  }
+}
+
+@media (max-width: 768px) {
+  .simulation-main {
+    padding: 16px;
+  }
+
+  .simulation-card {
+    padding: 18px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .summary-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .summary-label,
+  .result-field {
+    flex: 1 1 auto;
+    width: 100%;
+  }
+}

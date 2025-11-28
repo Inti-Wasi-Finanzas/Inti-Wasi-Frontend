@@ -1,1 +1,655 @@
-<p>simulation-create works!</p>
+<div class="simulation-container">
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="navbar-left">
+      <span class="logo-text" routerLink="/client">Inti Wasi</span>
+    </div>
+
+    <nav class="navbar-center">
+      <a routerLink="/client/profile" class="nav-link">Cliente</a>
+      <a routerLink="/client/simulation-create" class="nav-link active">
+        Nueva Simulación
+      </a>
+      <a routerLink="/client/my-simulations" class="nav-link">
+        Simulaciones Guardadas
+      </a>
+    </nav>
+
+    <div class="navbar-right">
+      <button class="logout-btn" routerLink="/auth/login">
+        <mat-icon>logout</mat-icon>
+      </button>
+    </div>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="simulation-main">
+    <section class="simulation-panel">
+      <div class="simulation-card">
+        <div class="simulation-inner">
+
+          <!-- ================================== -->
+          <!--      IZQUIERDA: FORMULARIO         -->
+          <!-- ================================== -->
+          <section class="form-section">
+            <h2 class="section-title">Simulación de crédito MiVivienda</h2>
+
+            <form class="form-grid">
+              <!-- DATOS DEL PROGRAMA Y CLIENTE -->
+
+              <!-- Fila 1 -->
+              <div class="field">
+                <select
+                  class="input-field"
+                  name="programName"
+                  [(ngModel)]="simulation.programName"
+                >
+                  <option value="" disabled selected>Programa</option>
+                  <option value="NUEVO_CREDITO_MIVIVIENDA">
+                    Nuevo Crédito MiVivienda
+                  </option>
+                </select>
+              </div>
+
+              <div class="field">
+                <input
+                  type="text"
+                  class="input-field"
+                  name="fullName"
+                  placeholder="Nombre completo"
+                  [(ngModel)]="simulation.fullName"
+                />
+              </div>
+
+              <!-- Fila 2 -->
+              <div class="field">
+                <input
+                  type="text"
+                  class="input-field"
+                  name="dni"
+                  placeholder="DNI"
+                  [(ngModel)]="simulation.dni"
+                />
+              </div>
+              <div class="field">
+                <input
+                  type="date"
+                  class="input-field"
+                  name="birthDate"
+                  placeholder="Fecha de nacimiento"
+                  [(ngModel)]="simulation.birthDate"
+                />
+              </div>
+
+              <!-- Fila 3 -->
+              <div class="field">
+                <input
+                  type="email"
+                  class="input-field"
+                  name="email"
+                  placeholder="Correo electrónico"
+                  [(ngModel)]="simulation.email"
+                />
+              </div>
+              <div class="field">
+                <input
+                  type="text"
+                  class="input-field"
+                  name="phoneNumber"
+                  placeholder="Teléfono"
+                  [(ngModel)]="simulation.phoneNumber"
+                />
+              </div>
+
+              <!-- Fila 4 -->
+              <div class="field">
+                <input
+                  type="text"
+                  class="input-field"
+                  name="address"
+                  placeholder="Dirección"
+                  [(ngModel)]="simulation.address"
+                />
+              </div>
+              <div class="field">
+                <select
+                  class="input-field"
+                  name="civilStatus"
+                  [(ngModel)]="simulation.civilStatus"
+                >
+                  <option value="" disabled selected>Estado civil</option>
+                  <option value="SOLTERO">Soltero(a)</option>
+                  <option value="CASADO">Casado(a)</option>
+                  <option value="DIVORCIADO">Divorciado(a)</option>
+                  <option value="VIUDO">Viudo(a)</option>
+                </select>
+              </div>
+
+              <!-- Fila 5 -->
+              <div class="field">
+                <input
+                  type="number"
+                  class="input-field"
+                  name="dependents"
+                  placeholder="N.º de dependientes"
+                  min="0"
+                  [(ngModel)]="simulation.dependents"
+                />
+              </div>
+              <div class="field">
+                <select
+                  class="input-field"
+                  name="jobType"
+                  [(ngModel)]="simulation.jobType"
+                >
+                  <option value="" disabled selected>Tipo de trabajo</option>
+                  <option value="DEPENDIENTE">Dependiente</option>
+                  <option value="INDEPENDIENTE">Independiente</option>
+                </select>
+              </div>
+
+              <!-- Fila 6 -->
+              <div class="field">
+                <input
+                  type="number"
+                  class="input-field"
+                  name="jobMonths"
+                  placeholder="Tiempo en el trabajo (meses)"
+                  min="0"
+                  [(ngModel)]="simulation.jobMonths"
+                />
+              </div>
+              <div class="field">
+                <select
+                  class="input-field"
+                  name="incomeProof"
+                  [(ngModel)]="simulation.incomeProof"
+                >
+                  <option value="" disabled selected>
+                    Tipo de comprobante de ingresos
+                  </option>
+                  <option value="BOLETA_PAGO">Boleta de pago</option>
+                  <option value="RECIBO_HONORARIOS">
+                    Recibo por honorarios
+                  </option>
+                  <option value="OTROS">Otros</option>
+                </select>
+              </div>
+
+              <!-- Fila 7 -->
+              <div class="field">
+                <input
+                  type="number"
+                  class="input-field"
+                  name="monthlyIncome"
+                  placeholder="Ingreso mensual (S/)"
+                  min="0"
+                  step="0.01"
+                  [(ngModel)]="simulation.monthlyIncome"
+                />
+              </div>
+              <div class="field">
+                <input
+                  type="number"
+                  class="input-field"
+                  name="spouseIncomes"
+                  placeholder="Ingresos del cónyuge (S/)"
+                  min="0"
+                  step="0.01"
+                  [(ngModel)]="simulation.spouseIncomes"
+                />
+              </div>
+
+              <!-- Fila 8 -->
+              <div class="field">
+                <select
+                  class="input-field"
+                  name="hasCurrentDebt"
+                  [(ngModel)]="simulation.hasCurrentDebt"
+                >
+                  <option value="" disabled selected>
+                    ¿Tiene deudas vigentes?
+                  </option>
+                  <option [ngValue]="true">Sí</option>
+                  <option [ngValue]="false">No</option>
+                </select>
+              </div>
+              <div class="field">
+                <input
+                  type="number"
+                  class="input-field"
+                  name="totalMonthlyDebtPayments"
+                  placeholder="Pago mensual de deudas (S/)"
+                  min="0"
+                  step="0.01"
+                  [(ngModel)]="simulation.totalMonthlyDebtPayments"
+                />
+              </div>
+
+              <!-- Fila 9 -->
+              <div class="field">
+                <select
+                  class="input-field"
+                  name="negativeRecordSbs"
+                  [(ngModel)]="simulation.negativeRecordSbs"
+                >
+                  <option value="" disabled selected>
+                    ¿Registro negativo SBS?
+                  </option>
+                  <option [ngValue]="true">Sí</option>
+                  <option [ngValue]="false">No</option>
+                </select>
+              </div>
+              <div class="field">
+                <select
+                  class="input-field"
+                  name="hasOtherProperty"
+                  [(ngModel)]="simulation.hasOtherProperty"
+                >
+                  <option value="" disabled selected>
+                    ¿Tiene otra propiedad?
+                  </option>
+                  <option [ngValue]="true">Sí</option>
+                  <option [ngValue]="false">No</option>
+                </select>
+              </div>
+
+              <!-- Fila 10 -->
+              <div class="field">
+                <select
+                  class="input-field"
+                  name="receivedBonoBeforeFMV"
+                  [(ngModel)]="simulation.receivedBonoBeforeFMV"
+                >
+                  <option value="" disabled selected>
+                    ¿Recibió bono MiVivienda antes?
+                  </option>
+                  <option [ngValue]="true">Sí</option>
+                  <option [ngValue]="false">No</option>
+                </select>
+              </div>
+              <div class="field">
+                <select
+                  class="input-field"
+                  name="typeBond"
+                  [(ngModel)]="simulation.typeBond"
+                >
+                  <option value="" disabled selected>Tipo de bono</option>
+                  <option value="BBP_TRADICIONAL">BBP Tradicional</option>
+                  <option value="BBP_SOSTENIBLE">BBP Sostenible</option>
+                </select>
+              </div>
+
+              <!-- DATOS DEL INMUEBLE -->
+              <h3 class="form-subtitle form-subtitle-full">
+                Datos del inmueble
+              </h3>
+
+              <!-- Fila 11 -->
+              <div class="field">
+                <input
+                  type="text"
+                  class="input-field"
+                  name="propertyName"
+                  placeholder="Nombre del proyecto / inmueble"
+                  [(ngModel)]="simulation.propertyName"
+                />
+              </div>
+              <div class="field">
+                <input
+                  type="text"
+                  class="input-field"
+                  name="propertyLocation"
+                  placeholder="Ciudad / provincia"
+                  [(ngModel)]="simulation.propertyLocation"
+                />
+              </div>
+
+              <!-- Fila 12 -->
+              <div class="field">
+                <input
+                  type="text"
+                  class="input-field"
+                  name="propertyDepartment"
+                  placeholder="Departamento"
+                  [(ngModel)]="simulation.propertyDepartment"
+                />
+              </div>
+              <div class="field">
+                <input
+                  type="text"
+                  class="input-field"
+                  name="propertyDistrict"
+                  placeholder="Distrito"
+                  [(ngModel)]="simulation.propertyDistrict"
+                />
+              </div>
+
+              <!-- Fila 13 -->
+              <div class="field">
+                <select
+                  class="input-field"
+                  name="propertyType"
+                  [(ngModel)]="simulation.propertyType"
+                >
+                  <option value="" disabled selected>Tipo de inmueble</option>
+                  <option value="DEPARTAMENTO">Departamento</option>
+                  <option value="CASA">Casa</option>
+                  <option value="TERRENO">Terreno</option>
+                </select>
+              </div>
+              <div class="field">
+                <input
+                  type="number"
+                  class="input-field"
+                  name="propertyPrice"
+                  placeholder="Precio del inmueble (S/)"
+                  min="0"
+                  step="0.01"
+                  [(ngModel)]="simulation.propertyPrice"
+                />
+              </div>
+
+              <!-- Fila 14 -->
+              <div class="field">
+                <select
+                  class="input-field"
+                  name="isPropertySustainable"
+                  [(ngModel)]="simulation.isPropertySustainable"
+                >
+                  <option value="" disabled selected>
+                    ¿Inmueble sostenible?
+                  </option>
+                  <option [ngValue]="true">Sí</option>
+                  <option [ngValue]="false">No</option>
+                </select>
+              </div>
+              <div class="field">
+                <select
+                  class="input-field"
+                  name="hasDownPayment"
+                  [(ngModel)]="simulation.hasDownPayment"
+                >
+                  <option value="" disabled selected>
+                    ¿Cuenta con cuota inicial?
+                  </option>
+                  <option [ngValue]="true">Sí</option>
+                  <option [ngValue]="false">No</option>
+                </select>
+              </div>
+
+              <!-- Fila 15 -->
+              <div class="field">
+                <input
+                  type="number"
+                  class="input-field"
+                  name="percentageDownPayment"
+                  placeholder="% de cuota inicial"
+                  min="0"
+                  max="100"
+                  step="0.01"
+                  [(ngModel)]="simulation.percentageDownPayment"
+                />
+              </div>
+              <div class="field">
+                <input
+                  type="text"
+                  class="input-field"
+                  name="financialInstitution"
+                  placeholder="Entidad financiera"
+                  [(ngModel)]="simulation.financialInstitution"
+                />
+              </div>
+
+              <!-- DATOS DEL CRÉDITO -->
+              <h3 class="form-subtitle form-subtitle-full">
+                Datos del crédito
+              </h3>
+
+              <!-- Fila 16 -->
+              <div class="field">
+                <input
+                  type="number"
+                  class="input-field"
+                  name="deadlinesMonths"
+                  placeholder="Plazo (meses)"
+                  min="0"
+                  [(ngModel)]="simulation.deadlinesMonths"
+                />
+              </div>
+              <div class="field">
+                <select
+                  class="input-field"
+                  name="typeRate"
+                  [(ngModel)]="simulation.typeRate"
+                >
+                  <option value="" disabled selected>Tipo de tasa</option>
+                  <option value="TEA">TEA</option>
+                  <option value="TNA">TNA</option>
+                </select>
+              </div>
+
+              <!-- Fila 17 -->
+              <div class="field">
+                <input
+                  type="number"
+                  class="input-field"
+                  name="interestRate"
+                  placeholder="Tasa de interés (%)"
+                  min="0"
+                  step="0.01"
+                  [(ngModel)]="simulation.interestRate"
+                />
+              </div>
+              <div class="field">
+                <select
+                  class="input-field"
+                  name="capitalization"
+                  [(ngModel)]="simulation.capitalization"
+                >
+                  <option value="" disabled selected>Capitalización</option>
+                  <option value="MENSUAL">Mensual</option>
+                  <option value="BIMESTRAL">Bimestral</option>
+                  <option value="TRIMESTRAL">Trimestral</option>
+                  <option value="ANUAL">Anual</option>
+                </select>
+              </div>
+
+              <!-- Fila 18 -->
+              <div class="field">
+                <input
+                  type="number"
+                  class="input-field"
+                  name="monthlyCommissions"
+                  placeholder="Comisiones mensuales (S/)"
+                  min="0"
+                  step="0.01"
+                  [(ngModel)]="simulation.monthlyCommissions"
+                />
+              </div>
+              <div class="field">
+                <input
+                  type="number"
+                  class="input-field"
+                  name="mortgageInsuranceRate"
+                  placeholder="Seguro de desgravamen (tasa)"
+                  min="0"
+                  step="0.0001"
+                  [(ngModel)]="simulation.mortgageInsuranceRate"
+                />
+              </div>
+
+              <!-- Fila 19 -->
+              <div class="field">
+                <input
+                  type="number"
+                  class="input-field"
+                  name="propertyInsurance"
+                  placeholder="Seguro del inmueble (S/)"
+                  min="0"
+                  step="0.01"
+                  [(ngModel)]="simulation.propertyInsurance"
+                />
+              </div>
+              <div class="field">
+                <select
+                  class="input-field"
+                  name="gracePeriodType"
+                  [(ngModel)]="simulation.gracePeriodType"
+                >
+                  <option value="" disabled selected>
+                    Tipo de período de gracia
+                  </option>
+                  <option value="NINGUNO">Ninguno</option>
+                  <option value="TOTAL">Total</option>
+                  <option value="PARCIAL">Parcial</option>
+                </select>
+              </div>
+
+              <!-- Fila 20 -->
+              <div class="field">
+                <input
+                  type="number"
+                  class="input-field"
+                  name="gracePeriodMonths"
+                  placeholder="Meses de gracia"
+                  min="0"
+                  [(ngModel)]="simulation.gracePeriodMonths"
+                />
+              </div>
+              <div class="field">
+                <input
+                  type="date"
+                  class="input-field"
+                  name="dayOfPayment"
+                  placeholder="Día de pago"
+                  [(ngModel)]="simulation.dayOfPayment"
+                />
+              </div>
+            </form>
+
+            <div class="simulate-button-container">
+              <button type="button" class="btn-simulate" (click)="onSimulate()">
+                Simular
+              </button>
+            </div>
+          </section>
+
+          <!-- ================================== -->
+          <!--        DERECHA: RESUMEN            -->
+          <!-- ================================== -->
+          <section class="summary-section">
+            <div class="summary-header">
+              <h2 class="section-title">Resumen de la Simulación</h2>
+              <button type="button" class="btn-save">Guardar Simulación</button>
+            </div>
+
+            <div class="summary-box">
+              <div class="summary-rows">
+
+                <div class="summary-row">
+                  <span class="summary-label">Monto del inmueble:</span>
+                  <input
+                    class="result-field"
+                    type="text"
+                    [value]="summary.montoInmueble ? ('S/ ' + summary.montoInmueble) : ''"
+                    placeholder="Vacío"
+                    disabled
+                  />
+                </div>
+
+                <div class="summary-row">
+                  <span class="summary-label">Cuota inicial:</span>
+                  <input
+                    class="result-field"
+                    type="text"
+                    [value]="summary.cuotaInicial ? ('S/ ' + summary.cuotaInicial) : ''"
+                    placeholder="Vacío"
+                    disabled
+                  />
+                </div>
+
+                <div class="summary-row">
+                  <span class="summary-label">Bono aplicable:</span>
+                  <input
+                    class="result-field"
+                    type="text"
+                    [value]="summary.bono !== null && summary.bono !== undefined ? ('S/ ' + summary.bono) : ''"
+                    placeholder="Vacío"
+                    disabled
+                  />
+                </div>
+
+                <div class="summary-row">
+                  <span class="summary-label">Monto a financiar:</span>
+                  <input
+                    class="result-field"
+                    type="text"
+                    [value]="summary.montoFinanciar ? ('S/ ' + summary.montoFinanciar) : ''"
+                    placeholder="Vacío"
+                    disabled
+                  />
+                </div>
+
+                <div class="summary-row">
+                  <span class="summary-label">Cuota mensual estimada:</span>
+                  <input
+                    class="result-field"
+                    type="text"
+                    [value]="summary.cuotaMensual ? ('S/ ' + summary.cuotaMensual) : ''"
+                    placeholder="Vacío"
+                    disabled
+                  />
+                </div>
+
+                <div class="summary-row">
+                  <span class="summary-label">TCEA:</span>
+                  <input
+                    class="result-field"
+                    type="text"
+                    [value]="summary.tcea || ''"
+                    placeholder="Vacío"
+                    disabled
+                  />
+                </div>
+
+                <div class="summary-row">
+                  <span class="summary-label">VAN:</span>
+                  <input
+                    class="result-field"
+                    type="text"
+                    [value]="summary.van || ''"
+                    placeholder="Vacío"
+                    disabled
+                  />
+                </div>
+
+                <div class="summary-row">
+                  <span class="summary-label">TIR:</span>
+                  <input
+                    class="result-field"
+                    type="text"
+                    [value]="summary.tir || ''"
+                    placeholder="Vacío"
+                    disabled
+                  />
+                </div>
+              </div>
+
+              <div class="summary-actions">
+                <button type="button" class="btn-pdf-schedule">
+                  Generar cronograma en PDF
+                </button>
+                <button type="button" class="btn-pdf-export">
+                  Exportar PDF
+                </button>
+              </div>
+            </div>
+          </section>
+
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
