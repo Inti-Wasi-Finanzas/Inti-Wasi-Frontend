@@ -40,7 +40,7 @@ export class AuthApi extends BaseApi {
       username: data.username,
       password: data.password,
       // Si tu backend espera "roles" como array:
-      roles: data.role ? [data.role] : ['ROLE_CLIENT']
+      roles: data.role ? [data.role] : ['ROLE_CLIENT'] // Valor por defecto
       // O si espera solo "role": { role: data.role || 'ROLE_CLIENT' }
     };
 

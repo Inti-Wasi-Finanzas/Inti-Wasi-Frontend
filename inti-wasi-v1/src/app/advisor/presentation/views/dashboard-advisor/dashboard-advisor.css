@@ -1,0 +1,210 @@
+/* CONTENEDOR GENERAL (fondo completo) */
+.dashboard-container {
+  min-height: 100vh;
+  background-image: url('/assets/images/bg-login.png');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+}
+
+/* NAVBAR SUPERIOR */
+.navbar {
+  height: 80px;
+  background-color: #f5a623; /* naranja Inti Wasi */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.logo-text {
+  font-size: 28px;
+  font-weight: bold;
+  color: #000;
+}
+
+.navbar-center {
+  display: flex;
+  gap: 40px;
+}
+
+.nav-link {
+  font-size: 18px;
+  color: #000;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+}
+
+.logout-btn {
+  background: transparent;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+/* CONTENIDO PRINCIPAL */
+.dashboard-main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+/* PANEL TRANSLÚCIDO */
+.overlay-panel {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(4px);
+  border-radius: 12px;
+  padding: 40px;
+  width: 85%;
+  max-width: 1100px;
+  text-align: center;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 40px;
+  color: #222;
+}
+
+/* TARJETAS */
+.cards-container {
+  display: flex;
+  justify-content: space-around;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+.card {
+  background-color: #fff;
+  width: 280px;
+  padding: 25px;
+  border-radius: 12px;
+  border: 3px solid #007bff;
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+}
+
+.card-icon {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+.card-icon mat-icon {
+  font-size: 60px;
+  width: 60px;
+  height: 60px;
+}
+
+.card h3 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #222;
+}
+
+.card p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* BOTÓN IR */
+.btn-ir {
+  background-color: #f39c12;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 25px;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-ir:hover {
+  background-color: #d9830e;
+}
+
+/* RESPONSIVE SIMPLE */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0 20px;
+  }
+
+  .navbar-center {
+    gap: 20px;
+  }
+
+  .overlay-panel {
+    width: 95%;
+    padding: 30px 20px;
+  }
+
+  .cards-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card {
+    width: 90%;
+    max-width: 320px;
+  }
+}
+
+
+/* Reutiliza tus estilos del cliente y añade esto */
+.advisor-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.card {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+}
+
+.card-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  color: #00a8a8;
+}
+
+.btn-ir {
+  margin-top: 16px;
+  padding: 10px 24px;
+  background: #00a8a8;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-ir:hover {
+  background: #008f8f;
+}

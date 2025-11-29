@@ -6,6 +6,6 @@ import { Component } from '@angular/core';
   templateUrl: './pending-simulations.html',
   styleUrl: './pending-simulations.css',
 })
-export class PendingSimulations {
+export class PendingSimulationsComponent {
 
 }

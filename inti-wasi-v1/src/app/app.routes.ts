@@ -17,6 +17,11 @@ export const routes: Routes = [
       import('./client/client.routes').then((m) => m.CLIENT_ROUTES),
   },
   {
+    path: 'advisor',
+    loadChildren: () =>
+      import('./advisor/advisor.routes').then((m) => m.ADVISOR_ROUTES),
+  },
+  {
     path: '**',
     redirectTo: 'auth/login',
   },
