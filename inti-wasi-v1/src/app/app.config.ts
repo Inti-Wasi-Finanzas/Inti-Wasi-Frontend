@@ -6,23 +6,21 @@ import {
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
-import {provideHttpClient} from '@angular/common/http';
-import {provideTranslateService, TranslateService} from '@ngx-translate/core';
-import {provideTranslateHttpLoader} from '@ngx-translate/http-loader';
+import {
+  provideHttpClient,
+  withInterceptors,
+  HTTP_INTERCEPTORS
+} from '@angular/common/http';
+import { authInterceptor } from './auth/infrastructure/auth.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
     provideRouter(routes),
-    provideHttpClient(),
-    provideTranslateService({
-      loader: provideTranslateHttpLoader({ prefix: './assets/i18n/', suffix: '.json' })
-    }),
-    provideAppInitializer(() => {
-      const translate = inject(TranslateService);
-      const browserLang = translate.getBrowserLang();
-      translate.use(browserLang ?? 'es');
-    })
+    //Httpclient + Interceptor
+    provideHttpClient(
+      withInterceptors([authInterceptor])
+    )
   ]
 };

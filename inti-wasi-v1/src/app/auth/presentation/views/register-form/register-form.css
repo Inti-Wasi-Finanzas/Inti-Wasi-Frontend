@@ -88,6 +88,62 @@
   font-size: 15px;
 }
 
+.role-group {
+  margin: 20px 0;
+}
+
+.role-label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 500;
+  color: #333;
+}
+
+.role-options {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.role-option {
+  flex: 1;
+  min-width: 140px;
+}
+
+.role-option input[type="radio"] {
+  display: none;
+}
+
+.role-option .checkmark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px;
+  border: 2px solid #ddd;
+  border-radius: 12px;
+  background: #fafafa;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.role-option .checkmark .icon {
+  font-size: 20px;
+}
+
+.role-option input[type="radio"]:checked + .checkmark {
+  border-color: #00a8a8;
+  background: #e6f7f7;
+  color: #00a8a8;
+  box-shadow: 0 0 10px rgba(0, 168, 168, 0.2);
+}
+
+.role-option:hover .checkmark {
+  border-color: #00caca;
+}
+
+
 .input-field::placeholder {
   color: #777;
 }

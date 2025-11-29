@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { NgFor, NgClass, DecimalPipe  } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
+import {AuthStore} from '../../../../auth/application/store/auth-store';
 
 type SimulationStatus = 'PROSPECTO' | 'EN_EVALUACION' | 'APROBADO' | 'RECHAZADO';
 
@@ -41,7 +42,7 @@ export class MySimulationsComponent {
     },
   ];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authStore: AuthStore) {}
 
   // Navegar a "Nueva Simulación" para editar esta simulación
   onEdit(sim: SavedSimulation): void {
@@ -92,6 +93,13 @@ export class MySimulationsComponent {
         return 'status-rechazado';
       default:
         return '';
+    }
+  }
+
+
+  logout() {
+    if (confirm('¿Estás seguro de que quieres cerrar sesión?')) {
+      this.authStore.logout();
     }
   }
 }

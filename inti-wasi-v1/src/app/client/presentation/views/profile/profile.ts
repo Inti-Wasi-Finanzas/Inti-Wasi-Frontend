@@ -1,9 +1,10 @@
 // src/app/client/presentation/views/profile/profile.ts
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import { NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
+import {AuthStore} from '../../../../auth/application/store/auth-store';
 
 
 @Component({
@@ -14,6 +15,9 @@ import { MatIcon } from '@angular/material/icon';
   imports: [RouterLink, NgIf, FormsModule, MatIcon],
 })
 export class ProfileComponent {
+
+  constructor(private authStore: AuthStore) {}
+
   // modo edición
   isEditing = false;
 
@@ -29,6 +33,12 @@ export class ProfileComponent {
   onEditClick(): void {
     // si estaba en edición, aquí podrías llamar a tu servicio para guardar
     this.isEditing = !this.isEditing;
+  }
+
+  logout() {
+    if (confirm('¿Estás seguro de que quieres cerrar sesión?')) {
+      this.authStore.logout();
+    }
   }
 }
 

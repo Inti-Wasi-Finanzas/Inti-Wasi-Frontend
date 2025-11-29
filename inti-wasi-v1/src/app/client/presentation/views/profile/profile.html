@@ -3,7 +3,7 @@
   <header class="navbar">
     <div class="navbar-left">
       <!-- Al hacer clic vuelve al dashboard -->
-      <span class="logo-text" routerLink="/client">Inti Wasi</span>
+      <span class="logo-text" routerLink="/client/menu-client">Inti Wasi</span>
     </div>
 
     <nav class="navbar-center">
@@ -13,7 +13,7 @@
     </nav>
 
     <div class="navbar-right">
-      <button class="logout-btn" routerLink="/auth/login">
+      <button class="logout-btn" (click)="logout()">
         <mat-icon>logout</mat-icon>
       </button>
     </div>

@@ -10,7 +10,7 @@ import { SimulationCreateComponent } from './presentation/views/simulation-creat
 
 export const CLIENT_ROUTES: Routes = [
   {
-    path: '',
+    path: 'menu-client',
     component: DashboardClientComponent,
   },
   {

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import { MatIcon } from '@angular/material/icon';
+import {AuthStore} from '../../../../auth/application/store/auth-store';
 
 /**
  * Modelo del formulario de simulación, alineado con tu backend
@@ -71,10 +72,10 @@ interface SimulationSummary {
   styleUrl: './simulation-create.css',
 })
 export class SimulationCreateComponent {
-  // ==============================
-  // FORMULARIO INICIAL (VACÍO)
-  // ==============================
 
+  constructor(private authStore: AuthStore) {}
+
+  // FORMULARIO INICIAL (VACÍO)
   simulation: NewSimulationForm = {
     programName: null,
     fullName: null,
@@ -118,15 +119,11 @@ export class SimulationCreateComponent {
     dayOfPayment: null,
   };
 
-  // ==============================
-  // RESUMEN (SE LLENA AL SIMULAR)
-  // ==============================
+  // RESUMEN (se llena al simular)
 
   summary: SimulationSummary = {};
 
-  // ==============================
-  // CLICK EN "SIMULAR"
-  // ==============================
+  // Click en Simular
 
   onSimulate(): void {
     const price = this.simulation.propertyPrice ?? 0;
@@ -179,9 +176,7 @@ export class SimulationCreateComponent {
     };
   }
 
-  // ==============================
-  // LÓGICA DE NEGOCIO AUXILIAR
-  // ==============================
+  // Lógica del negocio auxiliar
 
   /**
    * Cálculo del bono aplicable.
@@ -273,5 +268,11 @@ export class SimulationCreateComponent {
       return null;
     }
     return Math.round(value * 100) / 100;
+  }
+
+  logout() {
+    if (confirm('¿Estás seguro de que quieres cerrar sesión?')) {
+      this.authStore.logout();
+    }
   }
 }

@@ -1,47 +1,49 @@
 <div class="login-container">
-
   <header class="header">
     <h1>Inti Wasi</h1>
   </header>
 
   <div class="login-card">
 
-    <!-- Left side: Form -->
     <div class="login-left">
-      <h2>Iniciar Sesion</h2>
+      <h2>Iniciar Sesión</h2>
 
-      <form>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
         <input
           type="text"
+          formControlName="username"
           placeholder="Nombre de usuario"
           class="input-field"
+          [class.error]="form.get('username')?.invalid && form.get('username')?.touched"
         />
 
         <input
           type="password"
+          formControlName="password"
           placeholder="Contraseña"
           class="input-field"
+          [class.error]="form.get('password')?.invalid && form.get('password')?.touched"
         />
 
-        <button type="submit" class="btn-login">
-          Iniciar Sesion
+        <button type="submit" class="btn-login" [disabled]="form.invalid || store.loading()">
+          <span *ngIf="!store.loading()">Iniciar Sesión</span>
+          <mat-spinner diameter="20" *ngIf="store.loading()"></mat-spinner>
         </button>
 
+        <div class="error-message" *ngIf="store.error()">
+          {{ store.error() }}
+        </div>
+
         <p class="register-text">
-          No tienes una cuenta?
-          <a routerLink="/auth/register" class="register-link">Registrar</a>
+          ¿No tienes una cuenta?
+          <a routerLink="/auth/register" class="register-link">Registrarse</a>
         </p>
       </form>
     </div>
 
-    <!-- Right side: Image -->
     <div class="login-right">
-      <img
-        src="/assets/images/login-illustration.png"
-        alt="Imagen de inicio de sesión"
-      />
+      <img src="/assets/images/login-illustration.png" alt="Login" />
     </div>
   </div>
-
 </div>
