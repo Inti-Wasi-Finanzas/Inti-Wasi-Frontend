@@ -1,5 +1,4 @@
-<div class="saved-container">
-
+<div class="my-simulations-container">
   <!-- NAVBAR -->
   <header class="navbar">
     <div class="navbar-left">
@@ -23,73 +22,71 @@
     </div>
   </header>
 
-  <!-- CONTENIDO PRINCIPAL -->
-  <main class="saved-main">
-    <section class="saved-panel">
-      <div class="saved-card">
+  <main class="my-simulations-main">
+    <section class="my-simulations-panel">
+      <h2>Simulaciones guardadas</h2>
 
-        <table class="saved-table">
-          <thead>
-          <tr>
-            <th>Nombre completo</th>
-            <th>DNI</th>
-            <th>Teléfono</th>
-            <th>Ingresos</th>
-            <th>Estado</th>
-            <th class="actions-header">Acciones</th>
-          </tr>
-          </thead>
+      @if (store.loading()) {
+        <mat-progress-spinner diameter="40"></mat-progress-spinner>
+      }
 
-          <tbody>
-          <tr *ngFor="let sim of simulations">
-            <td>{{ sim.fullName }}</td>
-            <td>{{ sim.dni }}</td>
-            <td>{{ sim.phoneNumber }}</td>
-            <td>S/ {{ sim.monthlyIncome | number : '1.0-2' }}</td>
-            <td>
-                <span
-                  class="status-pill"
-                  [ngClass]="getStatusClass(sim.status)"
-                >
-                  {{ getStatusLabel(sim.status) }}
-                </span>
-            </td>
-            <td class="actions-cell">
-              <button
-                type="button"
-                class="icon-btn edit-btn"
-                (click)="onEdit(sim)"
-                title="Editar simulación"
-              >
-                ✏️
-              </button>
-              <button
-                type="button"
-                class="icon-btn delete-btn"
-                (click)="onDelete(sim)"
-                title="Eliminar simulación"
-              >
-                🗑️
-              </button>
-            </td>
-          </tr>
+      @if (store.error()) {
+        <mat-error>{{ store.error() }}</mat-error>
+      }
 
-          <tr *ngIf="simulations.length === 0">
-            <td colspan="6" class="empty-row">
-              No hay simulaciones guardadas.
-            </td>
-          </tr>
-          </tbody>
-        </table>
+      <table mat-table [dataSource]="store.simulations()" class="mat-elevation-z8 mat-table">
 
-        <!-- Paginación (placeholder, luego lo conectas de verdad) -->
-        <div class="pagination">
-          <button type="button" class="page-arrow" disabled>◀</button>
-          <span class="page-info">Página 1 de 1</span>
-          <button type="button" class="page-arrow" disabled>▶</button>
-        </div>
+        <!-- ID -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> ID </th>
+          <td mat-cell *matCellDef="let sim"> {{ sim.id }} </td>
+        </ng-container>
 
-      </div>
+        <!-- Programa -->
+        <ng-container matColumnDef="programName">
+          <th mat-header-cell *matHeaderCellDef> Programa </th>
+          <td mat-cell *matCellDef="let sim"> {{ sim.programName }} </td>
+        </ng-container>
+
+        <!-- Propiedad -->
+        <ng-container matColumnDef="propertyName">
+          <th mat-header-cell *matHeaderCellDef> Inmueble </th>
+          <td mat-cell *matCellDef="let sim"> {{ sim.propertyName }} </td>
+        </ng-container>
+
+        <!-- Monto financiado -->
+        <ng-container matColumnDef="amountFinanced">
+          <th mat-header-cell *matHeaderCellDef> Monto financiado </th>
+          <td mat-cell *matCellDef="let sim"> S/ {{ sim.amountFinanced | number:'1.2-2' }} </td>
+        </ng-container>
+
+        <!-- Cuota mensual -->
+        <ng-container matColumnDef="monthlyFee">
+          <th mat-header-cell *matHeaderCellDef> Cuota mensual </th>
+          <td mat-cell *matCellDef="let sim"> S/ {{ sim.monthlyFee | number:'1.2-2' }} </td>
+        </ng-container>
+
+        <!-- Estado -->
+        <ng-container matColumnDef="estado">
+          <th mat-header-cell *matHeaderCellDef> Estado </th>
+          <td mat-cell *matCellDef="let sim"> {{ sim.estado }} </td>
+        </ng-container>
+
+        <!-- Acciones -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Acciones </th>
+          <td mat-cell *matCellDef="let sim" class="actions-cell">
+            <button mat-button (click)="seeSummary(sim.id)">Ver resumen</button>
+            <button mat-icon-button color="warn" (click)="delete(sim.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
     </section>
   </main>
 </div>
+

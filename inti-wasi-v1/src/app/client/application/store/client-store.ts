@@ -12,6 +12,9 @@ export class ClientStore {
   private readonly clientSignal = signal<Client | null>(null);
   readonly client = this.clientSignal.asReadonly();
 
+  private readonly clientsSignal = signal<Client[]>([]);
+  readonly clients = this.clientsSignal.asReadonly();
+
   private readonly loadingSignal = signal<boolean>(false);
   readonly loading = this.loadingSignal.asReadonly();
 
@@ -22,6 +25,7 @@ export class ClientStore {
 
   constructor(private clientApi: ClientApi) {
     this.loadMyProfile();
+    this.loadAllClients();
   }
 
   /**
@@ -38,6 +42,25 @@ export class ClientStore {
       },
       error: err => {
         this.errorSignal.set(this.formatError(err, 'Failed to load client profile'));
+        this.loadingSignal.set(false);
+      }
+    });
+  }
+
+  /**
+   * Carga todos los clientes (para el advisor).
+   */
+  loadAllClients(): void {
+    this.loadingSignal.set(true);
+    this.errorSignal.set(null);
+
+    this.clientApi.getAllClients().pipe(takeUntilDestroyed()).subscribe({
+      next: clients => {
+        this.clientsSignal.set(clients);
+        this.loadingSignal.set(false);
+      },
+      error: err => {
+        this.errorSignal.set(this.formatError(err, 'Failed to load clients list'));
         this.loadingSignal.set(false);
       }
     });

@@ -1,14 +1,14 @@
- /* ===========================
-     LAYOUT GENERAL
-     =========================== */
-.saved-container {
+/* ===========================
+    LAYOUT GENERAL
+    =========================== */
+.clients-list-container {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   background-color: #f3f6fb;
 }
 
-.saved-main {
+.clients-list-main {
   flex: 1;
   background-image: url('/assets/images/bg-finanzas.png');
   background-size: cover;
@@ -16,49 +16,52 @@
   padding: 24px 32px 40px;
 }
 
-.saved-panel {
+.clients-list-panel {
   max-width: 1200px;
   margin: 0 auto;
 }
 
-.saved-card {
+.clients-list-card {
   background: rgba(255, 255, 255, 0.95);
   border-radius: 16px;
-  padding: 24px 28px 18px;
+  padding: 24px 28px 75px;
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
 }
 
 /* ===========================
-   NAVBAR
+   NAVBAR (estilo general)
    =========================== */
 
 .navbar {
+  height: 80px;
+  background-color: #f5a623;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 32px;
-  background-color: #f7a721;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  padding: 0 48px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-.navbar-left .logo-text {
-  font-size: 26px;
+.logo-text {
+  font-size: 28px;
   font-weight: 700;
+  color: #000;
   cursor: pointer;
 }
 
 .navbar-center {
   display: flex;
-  gap: 32px;
+  gap: 48px;
 }
 
 .nav-link {
-  font-size: 16px;
-  text-decoration: none;
+  font-size: 18px;
   color: #000;
-  padding: 6px 12px;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 6px 18px;
   border-radius: 4px;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition: 0.2s ease;
 }
 
 .nav-link:hover {
@@ -70,10 +73,10 @@
   color: #fff;
 }
 
-.navbar-right .logout-btn {
+.logout-btn {
   background: transparent;
   border: none;
-  font-size: 24px;
+  font-size: 26px;
   cursor: pointer;
 }
 
@@ -84,7 +87,7 @@
 .section-title {
   font-size: 22px;
   font-weight: 700;
-  margin-bottom: 20px;
+  margin-bottom: 35px;
   text-align: center;
   color: #333;
 }
@@ -96,37 +99,51 @@
   align-items: center;
 }
 
+/* CARD: dos columnas izquierda/derecha */
 .client-card {
   width: 100%;
-  max-width: 900px;
+  max-width: 800px;
   background: rgba(255, 255, 255, 0.95);
   border: 2px solid #0077cc;
   border-radius: 12px;
-  padding: 20px 40px;
+  padding: 20px 25px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   display: flex;
+  justify-content: center; /* nuevo: mantiene todo centrado */
   align-items: center;
+  gap: 10px;
 }
 
+/* LADO IZQUIERDO: ícono centrado y grande */
 .client-icon {
-  flex: 0 0 auto;
-  margin-right: 24px;
-
+  flex: 0 0 30%;           /* 40% izquierda, 60% derecha */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }
 
+/* ícono material encima del círculo */
 .client-icon mat-icon {
-  font-size: 64px;
-  width: 64px;
-  height: 64px;
-  line-height: 64px;
+  position: relative;
+  font-size: 170px;
+  width: auto;
+  height: auto;
+  line-height: normal;
+  margin-right:  auto;
 }
 
 
-
-.client-info {
-  margin: 0 auto;
-  text-align: center;
+/* LADO DERECHO: info centrada en su mitad */
+.client-icon {
+  flex: 0 0 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  min-width: 140px;   /* opcional, para que tenga espacio suficiente */
 }
+
 
 .client-name {
   font-size: 18px;
@@ -147,11 +164,18 @@
 
 @media (max-width: 600px) {
   .client-card {
-    grid-template-columns: 1fr;
+    flex-direction: column;
+    padding: 20px 16px;
     text-align: center;
   }
 
+  .client-icon,
+  .client-info {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+
   .client-icon {
-    margin: 0 auto 12px;
+    margin-bottom: 12px;
   }
 }

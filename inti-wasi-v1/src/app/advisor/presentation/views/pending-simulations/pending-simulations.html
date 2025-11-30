@@ -1,1 +1,19 @@
-<p>pending-simulations works!</p>
+<div class="pending-simulations-container">
+  <!-- NAVBAR SUPERIOR -->
+  <header class="navbar">
+    <div class="navbar-left">
+      <span class="logo-text">Inti Wasi</span>
+    </div>
+
+    <nav class="navbar-center">
+      <a routerLink="/advisor/clients-list" class="nav-link">Clientes</a>
+      <a routerLink="/advisor/pending-simulations" class="nav-link active">Resultados de Simulaciones</a>
+    </nav>
+
+    <div class="navbar-right">
+      <button class="logout-btn" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+      </button>
+    </div>
+  </header>
+</div>

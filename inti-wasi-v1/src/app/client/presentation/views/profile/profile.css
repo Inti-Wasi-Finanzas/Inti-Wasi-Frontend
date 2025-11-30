@@ -47,8 +47,8 @@
   transition: 0.2s ease;
 }
 
-.nav-link:hover:not(.active) {
-  text-decoration: underline;
+.nav-link:hover {
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .nav-link.active {

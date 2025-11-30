@@ -1,101 +1,61 @@
-import { Component } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
-import { NgFor, NgClass, DecimalPipe  } from '@angular/common';
-import { MatIcon } from '@angular/material/icon';
+import {Component, OnInit, inject} from '@angular/core';
+import {MatTableModule} from '@angular/material/table';
+import {MatButtonModule} from '@angular/material/button';
+import {MatProgressSpinner} from '@angular/material/progress-spinner';
+import {MatError} from '@angular/material/form-field';
+import {Router, RouterLink} from '@angular/router';
+import {MatIcon, MatIconModule} from '@angular/material/icon';
+import {CommonModule} from '@angular/common';
+import {SimulationStore} from '../../../../simulations/application/store/simulation-store';
 import {AuthStore} from '../../../../auth/application/store/auth-store';
-
-type SimulationStatus = 'PROSPECTO' | 'EN_EVALUACION' | 'APROBADO' | 'RECHAZADO';
-
-interface SavedSimulation {
-  id: number;
-  fullName: string;
-  dni: string;
-  phoneNumber: string;
-  monthlyIncome: number;
-  status: SimulationStatus;
-}
 
 @Component({
   selector: 'app-my-simulations',
-  imports: [RouterLink, NgFor, NgClass, DecimalPipe, MatIcon],
   standalone: true,
+  imports: [
+    RouterLink,
+    MatTableModule,
+    MatButtonModule,
+    MatProgressSpinner,
+    MatError,
+    MatIconModule,
+    MatIcon,
+    CommonModule
+  ],
   templateUrl: './my-simulations.html',
-  styleUrl: './my-simulations.css',
+  styleUrl: './my-simulations.css'
 })
-export class MySimulationsComponent {
-  simulations: SavedSimulation[] = [
-    {
-      id: 1,
-      fullName: 'Juan Pérez García',
-      dni: '12345678',
-      phoneNumber: '987654321',
-      monthlyIncome: 2500,
-      status: 'PROSPECTO',
-    },
-    {
-      id: 2,
-      fullName: 'Juan Pérez García',
-      dni: '12345678',
-      phoneNumber: '987654321',
-      monthlyIncome: 3800,
-      status: 'EN_EVALUACION',
-    },
+
+
+export class MySimulationsComponent implements OnInit {
+
+  readonly store = inject(SimulationStore);
+  private router = inject(Router);
+  private readonly authStore = inject(AuthStore);
+
+
+  displayedColumns: string[] = [
+    'id',
+    'programName',
+    'propertyName',
+    'amountFinanced',
+    'monthlyFee',
+    'estado',
+    'actions'
   ];
 
-  constructor(private router: Router, private authStore: AuthStore) {}
-
-  // Navegar a "Nueva Simulación" para editar esta simulación
-  onEdit(sim: SavedSimulation): void {
-    this.router.navigate(['/client/new-simulation'], {
-      queryParams: { id: sim.id }, // luego en el futuro cargas desde backend usando este id
-      state: { fromSaved: true },
-    });
+  ngOnInit(): void {
+    const clientId = 1; // TODO: reemplazar por el cliente autenticado
+    this.store.loadSimulationsByClient(clientId);
   }
 
-  // Eliminar de la lista (por ahora solo en memoria, luego se conecta al backend)
-  onDelete(sim: SavedSimulation): void {
-    const confirmDelete = confirm(
-      `¿Seguro que deseas eliminar la simulación de ${sim.fullName}?`
-    );
-    if (!confirmDelete) {
-      return;
-    }
-
-    this.simulations = this.simulations.filter((s) => s.id !== sim.id);
+  seeSummary(id: number): void {
+    this.router.navigate(['/simulations/new'], {queryParams: {simulationId: id}}).then();
   }
 
-  // Helpers para mostrar el estado con texto y clase CSS
-
-  getStatusLabel(status: SimulationStatus): string {
-    switch (status) {
-      case 'PROSPECTO':
-        return 'Prospecto';
-      case 'EN_EVALUACION':
-        return 'En evaluación';
-      case 'APROBADO':
-        return 'Aprobado';
-      case 'RECHAZADO':
-        return 'Rechazado';
-      default:
-        return status;
-    }
+  delete(id: number): void {
+    this.store.deleteSimulation(id);
   }
-
-  getStatusClass(status: SimulationStatus): string {
-    switch (status) {
-      case 'PROSPECTO':
-        return 'status-prospecto';
-      case 'EN_EVALUACION':
-        return 'status-evaluacion';
-      case 'APROBADO':
-        return 'status-aprobado';
-      case 'RECHAZADO':
-        return 'status-rechazado';
-      default:
-        return '';
-    }
-  }
-
 
   logout() {
     if (confirm('¿Estás seguro de que quieres cerrar sesión?')) {

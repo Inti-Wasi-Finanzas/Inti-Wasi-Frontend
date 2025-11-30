@@ -8,26 +8,30 @@
   flex-direction: column;
 }
 
-/* NAVBAR SUPERIOR */
+/* ===========================
+   NAVBAR (estilo general)
+   =========================== */
+
 .navbar {
   height: 80px;
-  background-color: #f5a623; /* naranja Inti Wasi */
+  background-color: #f5a623;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 40px;
+  padding: 0 48px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .logo-text {
   font-size: 28px;
-  font-weight: bold;
+  font-weight: 700;
   color: #000;
+  cursor: pointer;
 }
 
 .navbar-center {
   display: flex;
-  gap: 40px;
+  gap: 48px;
 }
 
 .nav-link {
@@ -35,18 +39,27 @@
   color: #000;
   text-decoration: none;
   font-weight: 500;
+  padding: 6px 18px;
+  border-radius: 4px;
+  transition: 0.2s ease;
 }
 
 .nav-link:hover {
-  text-decoration: underline;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.nav-link.active {
+  background-color: #000;
+  color: #fff;
 }
 
 .logout-btn {
   background: transparent;
   border: none;
-  font-size: 28px;
+  font-size: 26px;
   cursor: pointer;
 }
+
 
 /* CONTENIDO PRINCIPAL */
 .dashboard-main {

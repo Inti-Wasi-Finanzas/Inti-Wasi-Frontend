@@ -1,4 +1,4 @@
-<div class="saved-container">
+<div class="clients-list-container">
 
   <!-- NAVBAR -->
   <header class="navbar">
@@ -7,7 +7,7 @@
     </div>
 
     <nav class="navbar-center">
-      <a routerLink="/advisor/clients-list" class="nav-link">Clientes</a>
+      <a routerLink="/advisor/clients-list" class="nav-link active">Clientes</a>
       <!--<a routerLink="/client/simulation-create" class="nav-link">Nueva Simulación</a>-->
       <a routerLink="/advisor/pending-simulations" class="nav-link">Resultados de simulaciones</a>
     </nav>
@@ -20,9 +20,9 @@
   </header>
 
   <!-- CONTENIDO PRINCIPAL -->
-  <main class="saved-main">
-    <section class="saved-panel">
-      <div class="saved-card">
+  <main class="clients-list-main">
+    <section class="clients-list-panel">
+      <div class="clients-list-card">
         <h2 class="section-title">Listado de Clientes</h2>
 
         <div class="clients-grid">
@@ -38,7 +38,7 @@
               <h3 class="client-name">{{ client.fullName }}</h3>
               <p><strong>DNI:</strong> {{ client.dni }}</p>
               <p><strong>Email:</strong> {{ client.email }}</p>
-              <p><strong>Teléfono:</strong> {{ client.phoneNumber }}</p>
+              <p><strong>Teléfono:</strong> {{ client.phone }}</p>
               <p><strong>Ingresos Mensuales:</strong> S/ {{ client.monthlyIncome | number : '1.0-2' }}</p>
             </div>
 
