@@ -103,7 +103,7 @@
             <div class="data-row">
               <span class="label">Ingresos Mensuales</span>
               <span class="value" *ngIf="!isEditing; else editIncome">
-                {{ client.income || '-' }}
+                {{ client.monthlyIncome || '-' }}
               </span>
             </div>
             <ng-template #editIncome>
@@ -111,7 +111,7 @@
                 class="input-edit"
                 type="number"
                 placeholder="S/ 0.00"
-                [(ngModel)]="client.income"
+                [(ngModel)]="client.monthlyIncome"
               />
             </ng-template>
 
