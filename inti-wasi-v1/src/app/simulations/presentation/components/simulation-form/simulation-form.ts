@@ -69,13 +69,13 @@ export class SimulationFormComponent {
       dependents: [0, [Validators.min(0)]],
 
       jobType: ['DEPENDIENTE', Validators.required],
-      jobMonths: [60, [Validators.min(0)]],
+      jobMonths: [0, [Validators.min(0)]],
       incomeProof: ['BOLETA_PAGO', Validators.required],
-      monthlyIncome: [4000, [Validators.required, Validators.min(0)]],
+      monthlyIncome: [0, [Validators.required, Validators.min(0)]],
       spouseIncomes: [0, [Validators.min(0)]],
 
-      hasCurrentDebt: [true],
-      totalMonthlyDebtPayments: [500, [Validators.min(0)]],
+      hasCurrentDebt: [false],
+      totalMonthlyDebtPayments: [0, [Validators.min(0)]],
       negativeRecordSbs: [false],
 
       hasOtherProperty: [false],
@@ -94,14 +94,14 @@ export class SimulationFormComponent {
       percentageDownPayment: [10, [Validators.min(0), Validators.max(100)]],
 
       financialInstitution: ['BCP', Validators.required],
-      deadlinesMonths: [240, [Validators.required, Validators.min(1)]],
+      deadlinesMonths: [0, [Validators.required, Validators.min(1)]],
       typeRate: ['TEA', Validators.required],
       interestRate: [14, [Validators.required, Validators.min(0)]],
       capitalization: ['MENSUAL', Validators.required],
 
-      monthlyCommissions: [10, [Validators.min(0)]],
+      monthlyCommissions: [0, [Validators.min(0)]],
       mortgageInsuranceRate: [0.0003, [Validators.min(0)]],
-      propertyInsurance: [20, [Validators.min(0)]],
+      propertyInsurance: [0.030, [Validators.min(0)]],
 
       gracePeriodType: ['NINGUNO', Validators.required],
       gracePeriodMonths: [0, [Validators.min(0)]],

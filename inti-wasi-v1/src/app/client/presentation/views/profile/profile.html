@@ -39,7 +39,7 @@
             <div class="data-row">
               <span class="label">Nombre Completo</span>
               <span class="value" *ngIf="!isEditing; else editFullName">
-                {{ client.fullName || '-' }}
+                {{ clientStore.client()?.fullName || '-' }}
               </span>
             </div>
             <ng-template #editFullName>
@@ -47,7 +47,7 @@
                 class="input-edit"
                 type="text"
                 placeholder="Nombre completo"
-                [(ngModel)]="client.fullName"
+                [(ngModel)]="editModel.fullName"
               />
             </ng-template>
 
@@ -55,7 +55,7 @@
             <div class="data-row">
               <span class="label">DNI</span>
               <span class="value" *ngIf="!isEditing; else editDni">
-                {{ client.dni || '-' }}
+                {{ clientStore.client()?.dni || '-' }}
               </span>
             </div>
             <ng-template #editDni>
@@ -63,7 +63,7 @@
                 class="input-edit"
                 type="text"
                 placeholder="DNI"
-                [(ngModel)]="client.dni"
+                [(ngModel)]="editModel.dni"
               />
             </ng-template>
 
@@ -71,7 +71,7 @@
             <div class="data-row">
               <span class="label">Correo electrónico</span>
               <span class="value" *ngIf="!isEditing; else editEmail">
-                {{ client.email || '-' }}
+                {{ clientStore.client()?.email || '-' }}
               </span>
             </div>
             <ng-template #editEmail>
@@ -79,7 +79,7 @@
                 class="input-edit"
                 type="email"
                 placeholder="correo@ejemplo.com"
-                [(ngModel)]="client.email"
+                [(ngModel)]="editModel.email"
               />
             </ng-template>
 
@@ -87,7 +87,7 @@
             <div class="data-row">
               <span class="label">Teléfono</span>
               <span class="value" *ngIf="!isEditing; else editPhone">
-                {{ client.phone || '-' }}
+                {{ clientStore.client()?.phone || '-' }}
               </span>
             </div>
             <ng-template #editPhone>
@@ -95,7 +95,7 @@
                 class="input-edit"
                 type="text"
                 placeholder="Teléfono"
-                [(ngModel)]="client.phone"
+                [(ngModel)]="editModel.phone"
               />
             </ng-template>
 
@@ -103,7 +103,7 @@
             <div class="data-row">
               <span class="label">Ingresos Mensuales</span>
               <span class="value" *ngIf="!isEditing; else editIncome">
-                {{ client.monthlyIncome || '-' }}
+                {{ clientStore.client()?.monthlyIncome || '-' }}
               </span>
             </div>
             <ng-template #editIncome>
@@ -111,7 +111,7 @@
                 class="input-edit"
                 type="number"
                 placeholder="S/ 0.00"
-                [(ngModel)]="client.monthlyIncome"
+                [(ngModel)]="editModel.monthlyIncome"
               />
             </ng-template>
 

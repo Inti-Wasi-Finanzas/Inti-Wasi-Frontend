@@ -26,7 +26,7 @@
         <h2 class="section-title">Listado de Clientes</h2>
 
         <div class="clients-grid">
-          <div class="client-card" *ngFor="let client of clients">
+          <div class="client-card" *ngFor="let client of clientStore.clients()">
 
             <!-- Ícono a la izquierda -->
             <div class="client-icon">
@@ -45,7 +45,7 @@
             <!-- botones en caso se implementen-->
           </div>
 
-          <div *ngIf="clients.length === 0" class="empty-row">
+          <div *ngIf="clientStore.clients().length === 0" class="empty-row">
             No hay clientes registrados.
           </div>
         </div>

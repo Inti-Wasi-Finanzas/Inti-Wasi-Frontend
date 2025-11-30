@@ -22,8 +22,8 @@ export class ProfileComponent {
   // modo edición
   isEditing = false;
 
-  // Modelo usado por el template (ngModel)
-  client = {
+  // modelo solo para editar
+  editModel = {
     fullName: '',
     dni: '',
     email: '',
@@ -31,43 +31,38 @@ export class ProfileComponent {
     monthlyIncome: 0
   };
 
-  constructor() {
-    // Sincroniza el modelo local con el store cuando se cargue el perfil
-    effect(() => {
-      const c = this.clientStore.client();
-      if (c) {
-        this.client = {
-          fullName: c.fullName,
-          dni: c.dni,
-          email: c.email,
-          phone: c.phone,
-          monthlyIncome: c.monthlyIncome
-        };
-      }
-    });
-  }
 
   onEditClick(): void {
-    // Si recién entra a edición, solo cambiamos el modo
+    const current = this.clientStore.client();
     if (!this.isEditing) {
+      // Entrando a edición: copiamos datos actuales al modelo
+      if (!current) return; // aún no se cargó el perfil
+      this.editModel = {
+        fullName: current.fullName,
+        dni: current.dni,
+        email: current.email,
+        phone: current.phone,
+        monthlyIncome: current.monthlyIncome
+      };
       this.isEditing = true;
       return;
     }
 
     // Guardar cambios
-    const current = this.clientStore.client();
+    if (!current) return;
     const updated = new Client({
-      id: current?.id ?? 0,
-      fullName: this.client.fullName,
-      dni: this.client.dni,
-      email: this.client.email,
-      phone: this.client.phone,
-      monthlyIncome: Number(this.client.monthlyIncome) || 0
+      id: current.id,
+      fullName: this.editModel.fullName,
+      dni: this.editModel.dni,
+      email: this.editModel.email,
+      phone: this.editModel.phone,
+      monthlyIncome: Number(this.editModel.monthlyIncome) || 0
     });
 
     this.clientStore.updateMyProfile(updated);
     this.isEditing = false;
   }
+
 
   logout() {
     if (confirm('¿Estás seguro de que quieres cerrar sesión?')) {

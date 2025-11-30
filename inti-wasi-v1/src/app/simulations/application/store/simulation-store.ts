@@ -1,4 +1,4 @@
-import {Injectable, Signal, computed, signal} from '@angular/core';
+import {Injectable, Signal, computed, signal, inject, DestroyRef} from '@angular/core';
 import {SimulationsApi} from '../../infrastructure/api/simulations-api';
 import {Simulation} from '../../domain/model/simulation.entity';
 import {PaymentScheduleEntry} from '../../domain/model/payment-schedule-entry.entity';
@@ -27,6 +27,9 @@ export class SimulationStore {
   private readonly errorSignal = signal<string | null>(null);
   readonly error = this.errorSignal.asReadonly();
 
+  // 👇 añadimos DestroyRef usando inject
+  private readonly destroyRef = inject(DestroyRef);
+
   constructor(private simulationsApi: SimulationsApi) {
   }
 
@@ -38,8 +41,9 @@ export class SimulationStore {
   loadSimulationsByClient(clientId: number): void {
     this.loadingSignal.set(true);
     this.errorSignal.set(null);
+
     this.simulationsApi.getSimulationsByClient(clientId)
-      .pipe(takeUntilDestroyed(), retry(1))
+      .pipe(takeUntilDestroyed(this.destroyRef), retry(1))
       .subscribe({
         next: sims => {
           this.simulationsSignal.set(sims);

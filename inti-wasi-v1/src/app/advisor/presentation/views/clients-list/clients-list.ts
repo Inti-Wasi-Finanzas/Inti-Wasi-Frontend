@@ -1,5 +1,5 @@
-import {Component, effect, inject} from '@angular/core';
-import {DecimalPipe, NgFor, NgForOf} from "@angular/common";
+import {Component, effect, inject, OnInit} from '@angular/core';
+import {CommonModule, DecimalPipe, NgFor, NgForOf} from "@angular/common";
 import {MatIcon} from "@angular/material/icon";
 import {Router, RouterLink} from "@angular/router";
 import {AuthStore} from '../../../../auth/application/store/auth-store';
@@ -11,21 +11,17 @@ import {ClientStore} from '../../../../client/application/store/client-store';
 @Component({
   selector: 'app-clients-list',
   standalone: true,
-  imports: [RouterLink, NgFor, DecimalPipe, MatIcon],
+  imports: [RouterLink, CommonModule, MatIcon],
   templateUrl: './clients-list.html',
   styleUrl: './clients-list.css',
 })
-export class ClientsListComponent {
+export class ClientsListComponent implements OnInit{
+
   private readonly authStore = inject(AuthStore);
-  readonly clientsStore = inject(ClientStore);
+  readonly clientStore = inject(ClientStore);
 
-  clients: Client[] = [];
-
-  constructor(private router: Router) {
-    // sincroniza el array local con el store
-    effect(() => {
-      this.clients = this.clientsStore.clients();
-    });
+  ngOnInit(): void {
+    this.clientStore.loadAllClients();  // 👈 lo vemos en el punto 2
   }
 
   logout(): void {

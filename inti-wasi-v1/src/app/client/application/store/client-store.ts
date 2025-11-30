@@ -1,4 +1,4 @@
-import { Injectable, computed, signal } from '@angular/core';
+import {Injectable, computed, signal, inject, DestroyRef} from '@angular/core';
 import { Client } from '../../domain/model/client.entity';
 import { ClientApi } from '../../infrastructure/api/client-api';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -23,9 +23,11 @@ export class ClientStore {
 
   readonly hasProfile = computed(() => this.client() !== null);
 
+  private readonly destroyRef = inject(DestroyRef);
+
   constructor(private clientApi: ClientApi) {
     this.loadMyProfile();
-    this.loadAllClients();
+    //this.loadAllClients();
   }
 
   /**
@@ -35,7 +37,7 @@ export class ClientStore {
     this.loadingSignal.set(true);
     this.errorSignal.set(null);
 
-    this.clientApi.getMyProfile().pipe(takeUntilDestroyed()).subscribe({
+    this.clientApi.getMyProfile().pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: client => {
         this.clientSignal.set(client);
         this.loadingSignal.set(false);
@@ -54,7 +56,7 @@ export class ClientStore {
     this.loadingSignal.set(true);
     this.errorSignal.set(null);
 
-    this.clientApi.getAllClients().pipe(takeUntilDestroyed()).subscribe({
+    this.clientApi.getAllClients().pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: clients => {
         this.clientsSignal.set(clients);
         this.loadingSignal.set(false);

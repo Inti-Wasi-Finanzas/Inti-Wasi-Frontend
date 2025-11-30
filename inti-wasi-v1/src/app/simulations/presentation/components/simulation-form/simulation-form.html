@@ -213,6 +213,14 @@
     </mat-form-field>
 
     <mat-form-field>
+      <mat-label>¿Tiene cuota inicial?</mat-label>
+      <mat-select formControlName="hasDownPayment">
+        <mat-option [value]="true">Sí</mat-option>
+        <mat-option [value]="false">No</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
       <mat-label>% de cuota inicial</mat-label>
       <input matInput type="number" formControlName="percentageDownPayment">
     </mat-form-field>
