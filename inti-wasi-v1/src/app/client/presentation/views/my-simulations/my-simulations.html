@@ -24,7 +24,7 @@
 
   <main class="my-simulations-main">
     <section class="my-simulations-panel">
-      <h2>Simulaciones guardadas</h2>
+      <h2 class="my-simulations-title">Simulaciones guardadas</h2>
 
       @if (store.loading()) {
         <mat-progress-spinner diameter="40"></mat-progress-spinner>
@@ -34,7 +34,8 @@
         <mat-error>{{ store.error() }}</mat-error>
       }
 
-      <table mat-table [dataSource]="store.simulations()" class="mat-elevation-z8 mat-table">
+      <table mat-table [dataSource]="store.simulations() ?? []" class="mat-elevation-z8 mat-table">
+
 
         <!-- ID -->
         <ng-container matColumnDef="id">

@@ -50,6 +50,11 @@
   cursor: pointer;
 }
 
+/* aplica el tamaño al icono, no al botón */
+.logout-btn mat-icon {
+  font-size: 26px;
+}
+
 
 /* ===========================
    LAYOUT GENERAL
@@ -71,34 +76,34 @@
   padding: 24px 32px 40px;
 }
 
+
 .my-simulations-panel {
   max-width: 1200px;
   margin: 0 auto;
 
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 32px;
-  padding: 45px;
+  grid-template-columns: 1fr;  /* ← SOLO UNA COLUMNA */
+  padding: 32px 40px;
 
   border-radius: 16px;
-
-  background: rgba(255, 255, 255, 0.75); /* Fondo blanco translúcido */
+  background: rgba(255, 255, 255, 0.75);
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.1);
 }
 
-
-.my-simulations {
-  padding: 16px;
+.my-simulations-title{
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 4px;
 }
 
 .mat-table {
   width: 100%;
-  margin-top: 20px;
 }
 
 .actions-cell {
   display: flex;
   gap: 8px;
+
 }
 
 

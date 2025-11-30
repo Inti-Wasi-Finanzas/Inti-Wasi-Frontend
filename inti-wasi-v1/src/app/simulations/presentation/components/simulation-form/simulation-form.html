@@ -110,6 +110,57 @@
     </mat-form-field>
   </div>
 
+  <h3>Situación crediticia</h3>
+  <div class="row">
+    <mat-form-field>
+      <mat-label>¿Tiene deudas actuales?</mat-label>
+      <mat-select formControlName="hasCurrentDebt">
+        <mat-option [value]="true">Sí</mat-option>
+        <mat-option [value]="false">No</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Pago mensual total de deudas</mat-label>
+      <input matInput type="number" formControlName="totalMonthlyDebtPayments">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Registro negativo en SBS</mat-label>
+      <mat-select formControlName="negativeRecordSbs">
+        <mat-option [value]="true">Sí</mat-option>
+        <mat-option [value]="false">No</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <h3>Otros inmuebles y bonos</h3>
+  <div class="row">
+    <mat-form-field>
+      <mat-label>¿Tiene otra propiedad?</mat-label>
+      <mat-select formControlName="hasOtherProperty">
+        <mat-option [value]="true">Sí</mat-option>
+        <mat-option [value]="false">No</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>¿Recibió bono antes FMV?</mat-label>
+      <mat-select formControlName="receivedBonoBeforeFMV">
+        <mat-option [value]="true">Sí</mat-option>
+        <mat-option [value]="false">No</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>¿Inmueble sostenible?</mat-label>
+      <mat-select formControlName="isPropertySustainable">
+        <mat-option [value]="true">Sí</mat-option>
+        <mat-option [value]="false">No</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
   <h3>Propiedad</h3>
   <div class="row">
     <mat-form-field>
@@ -146,6 +197,24 @@
     <mat-form-field>
       <mat-label>Precio de la propiedad</mat-label>
       <input matInput type="number" formControlName="propertyPrice">
+    </mat-form-field>
+  </div>
+
+
+  <h3>Cuota inicial y bono</h3>
+  <div class="row">
+    <mat-form-field>
+      <mat-label>Tipo de bono</mat-label>
+      <mat-select formControlName="typeBond">
+        @for (tb of typeBonds; track tb) {
+          <mat-option [value]="tb">{{ tb }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>% de cuota inicial</mat-label>
+      <input matInput type="number" formControlName="percentageDownPayment">
     </mat-form-field>
   </div>
 
@@ -187,22 +256,24 @@
     </mat-form-field>
   </div>
 
-  <h3>Cuota inicial y bono</h3>
+  <h3>Comisiones y seguros</h3>
   <div class="row">
     <mat-form-field>
-      <mat-label>Tipo de bono</mat-label>
-      <mat-select formControlName="typeBond">
-        @for (tb of typeBonds; track tb) {
-          <mat-option [value]="tb">{{ tb }}</mat-option>
-        }
-      </mat-select>
+      <mat-label>Comisiones mensuales</mat-label>
+      <input matInput type="number" formControlName="monthlyCommissions">
     </mat-form-field>
 
     <mat-form-field>
-      <mat-label>% de cuota inicial</mat-label>
-      <input matInput type="number" formControlName="percentageDownPayment">
+      <mat-label>Tasa de seguro de desgravamen</mat-label>
+      <input matInput type="number" formControlName="mortgageInsuranceRate">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Seguro de inmueble</mat-label>
+      <input matInput type="number" formControlName="propertyInsurance">
     </mat-form-field>
   </div>
+
 
   <h3>Gracia y fecha de pago</h3>
   <div class="row">
