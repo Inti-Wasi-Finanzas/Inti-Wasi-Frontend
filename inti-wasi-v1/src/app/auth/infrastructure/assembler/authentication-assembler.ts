@@ -8,7 +8,7 @@ export class AuthenticationAssembler implements BaseAssembler<User, AuthResource
     return new User({
       id: resource.id,
       username: resource.username,
-      roles: this.extractRolesFromToken(resource.token)
+      role: resource.role
     });
   }
 

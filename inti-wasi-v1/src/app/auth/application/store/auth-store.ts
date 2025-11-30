@@ -1,32 +1,26 @@
 import { Injectable, signal, computed, effect } from '@angular/core';
 import { User } from '../../domain/model/user.entity';
-import { AuthApi } from  '../../infrastructure/api/auth-api';
+import { AuthApi } from '../../infrastructure/api/auth-api';
 import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class AuthStore {
   private readonly _user = signal<User | null>(null);
 
-  // Signals públicos
   readonly user = this._user.asReadonly();
   readonly isAuthenticated = computed(() => !!this._user());
   readonly isClient = computed(() => this._user()?.isClient ?? false);
-  readonly isAdvisor = computed(() => this._user()?.isAdvisor ?? false); // ROLES: ROLE_ADVISOR
+  readonly isAdvisor = computed(() => this._user()?.isAdvisor ?? false);
   readonly isAdmin = computed(() => this._user()?.isAdmin ?? false);
 
   readonly loading = signal(false);
   readonly error = signal<string | null>(null);
 
-  constructor(
-    private authApi: AuthApi,
-    private router: Router
-  ) {
+  constructor(private authApi: AuthApi, private router: Router) {
     this.loadUserFromToken();
 
-    // REDIRECCIÓN AUTOMÁTICA CUANDO SE LOGUEA
     effect(() => {
       if (this.isAuthenticated()) {
-        console.log('AuthStore detectó login → redirigiendo...');
         this.redirectByRole();
       }
     });
@@ -36,17 +30,23 @@ export class AuthStore {
     this.loading.set(true);
     this.error.set(null);
 
+
     this.authApi.signIn(credentials).subscribe({
-      next: (user) => {
-        console.log('Login exitoso -> guardando usuario en store');
-        this._user.set(user);           // ← IMPORTANTE: aquí se actualiza
+      next: (response) => {
+        const role = Array.isArray(response.role) ? response.role[0] : response.role;
+        const user = new User({
+          id: response.id,
+          username: response.username,
+          role: role
+        });
+
+        this._user.set(user);
         this.loading.set(false);
-        //navegacion segura inmediatamente despues de setear el usuario
+
         this.redirectByRole();
       },
       error: (err) => {
-        console.error('Error login:', err);
-        this.error.set('Usuario o contraseña incorrectos');
+        this.error.set('Invalid credentials');
         this.loading.set(false);
       }
     });
@@ -64,29 +64,29 @@ export class AuthStore {
 
     try {
       const payload = JSON.parse(atob(token.split('.')[1]));
+      const role = payload.role;
+
       const user = new User({
         id: payload.sub || payload.id,
         username: payload.sub || payload.username,
-        roles: (payload.scope || payload.authorities || 'ROLE_CLIENT').split(' ').filter(Boolean)
+        role: role
       });
+
       this._user.set(user);
     } catch (e) {
-      console.warn('Token inválido al cargar');
+      console.warn('Invalid token');
       this.authApi.logout();
     }
   }
 
   private redirectByRole() {
-    const target = this.isClient()
-      ? ['/client/menu-client']
-      : this.isAdvisor()
-        ? ['/advisor/menu-advisor']
-        : this.isAdmin()
-          ? ['/admin/users']
-          : ['/home'];
+    // Compara role que ahora es un string
+    const target = this._user()?.role === 'ROLE_ADVISOR'
+      ? ['/advisor/menu-advisor']
+      : this._user()?.role === 'ROLE_CLIENT'
+        ? ['/client/menu-client']
+        : ['/home'];
 
-    // Ejecutar la navegación en la siguiente microtarea para evitar problemas de timing en apps zoneless
-    Promise.resolve().then(() => this.router.navigate(target));
+    this.router.navigate(target);
   }
 }
-

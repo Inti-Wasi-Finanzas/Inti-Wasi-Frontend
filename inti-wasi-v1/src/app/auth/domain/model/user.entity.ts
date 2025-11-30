@@ -3,12 +3,12 @@ import { BaseEntity } from '../../../shared/infrastructure/api/base-entity';
 export class User implements BaseEntity {
   private _id: number;
   private _username: string;
-  private _roles: string[] = [];
+  private _role: string = '';
 
-  constructor(data: { id: number; username: string; roles?: string[] }) {
+  constructor(data: { id: number; username: string; role: string }) {
     this._id = data.id;
     this._username = data.username;
-    this._roles = data.roles ?? [];
+    this._role = data.role;
   }
 
   get id(): number { return this._id; }
@@ -17,10 +17,10 @@ export class User implements BaseEntity {
   get username(): string { return this._username; }
   set username(value: string) { this._username = value; }
 
-  get roles(): string[] { return [...this._roles]; }
+  get role(): string { return this._role; }
 
   hasRole(role: string): boolean {
-    return this._roles.includes(role);
+    return this._role.includes(role);
   }
 
   get isClient(): boolean { return this.hasRole('ROLE_CLIENT'); }

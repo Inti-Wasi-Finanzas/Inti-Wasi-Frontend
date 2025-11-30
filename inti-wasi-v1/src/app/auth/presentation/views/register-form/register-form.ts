@@ -13,6 +13,8 @@ import { MatIcon } from '@angular/material/icon';
   templateUrl: './register-form.html',
   styleUrls: ['./register-form.css']
 })
+
+
 export class RegisterFormComponent {
   private readonly fb = new FormBuilder();
 
@@ -39,21 +41,23 @@ export class RegisterFormComponent {
     this.success = false;
 
     const { username, password, role } = this.form.getRawValue();
-
-    // Mapeamos al rol que espera tu backend
     const roleForBackend = role === 'CLIENT' ? 'ROLE_CLIENT' : 'ROLE_ADVISOR';
 
     this.authApi.signUp({
       username: username!.trim(),
       password: password!,
       role: roleForBackend,
-
     }).subscribe({
       next: () => {
         this.success = true;
-        //setTimeout(() => this.router.navigate(['/auth/login']), 2500);
+        console.log('Usuario registrado, redirigiendo al login...');
+        // Después de registrar, redirige a la página de login
+        setTimeout(() => {
+          this.router.navigate(['/auth/login']);
+        }, 500);
       },
       error: (err) => {
+        console.error('Error al registrar:', err);
         this.error = err.error?.message || 'Error al crear cuenta. Usuario puede existir.';
         this.loading = false;
       }
