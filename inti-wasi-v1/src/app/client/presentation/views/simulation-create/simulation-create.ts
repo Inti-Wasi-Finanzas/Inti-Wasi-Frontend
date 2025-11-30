@@ -44,7 +44,7 @@ export class SimulationCreateComponent {
     this.error = null;
     this.lastSimulation = null;
 
-    this.api.createSimulation(payload as any).subscribe({
+    this.api.createSimulation(payload).subscribe({
       next: sim => {
         this.lastSimulation = sim;
         this.loading = false;
