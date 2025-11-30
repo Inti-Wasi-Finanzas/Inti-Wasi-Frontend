@@ -1,4 +1,6 @@
-/* =========================== LAYOUT GENERAL =========================== */
+ /* ===========================
+     LAYOUT GENERAL
+     =========================== */
 .saved-container {
   min-height: 100vh;
   display: flex;
@@ -8,7 +10,7 @@
 
 .saved-main {
   flex: 1;
-  background-image: url('/assets/images/bg-finanzas.png'); /* Imagen de fondo */
+  background-image: url('/assets/images/bg-finanzas.png');
   background-size: cover;
   background-position: center;
   padding: 24px 32px 40px;
@@ -26,27 +28,22 @@
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
 }
 
-.client-list-title {
-  font-size: 20px;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 16px;
-}
+/* ===========================
+   NAVBAR
+   =========================== */
 
-/* =========================== NAVBAR =========================== */
 .navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 14px 32px;
-  background-color: #ff8c00; /* Color de fondo del navbar */
+  background-color: #f7a721;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
 }
 
 .navbar-left .logo-text {
   font-size: 26px;
   font-weight: 700;
-  color: white;
   cursor: pointer;
 }
 
@@ -58,7 +55,7 @@
 .nav-link {
   font-size: 16px;
   text-decoration: none;
-  color: white;
+  color: #000;
   padding: 6px 12px;
   border-radius: 4px;
   transition: background-color 0.2s ease, color 0.2s ease;
@@ -77,74 +74,84 @@
   background: transparent;
   border: none;
   font-size: 24px;
-  color: white;
   cursor: pointer;
 }
 
-/* =========================== TABLA =========================== */
-.saved-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 14px;
-}
+/* ===========================
+   LISTADO DE CLIENTES
+   =========================== */
 
-.saved-table thead {
-  background-color: #f3f4f8;
-}
-
-.saved-table th,
-.saved-table td {
-  padding: 12px 10px;
-  text-align: left;
-}
-
-.saved-table th {
+.section-title {
+  font-size: 22px;
   font-weight: 700;
-  border-bottom: 2px solid #e1e4ed;
-}
-
-.saved-table tbody tr:nth-child(even) {
-  background-color: #fafbff;
-}
-
-.saved-table tbody tr:hover {
-  background-color: #eef4ff;
-}
-
-.actions-header,
-.actions-cell {
+  margin-bottom: 20px;
   text-align: center;
+  color: #333;
 }
 
-/* =========================== FILA VACÍA =========================== */
-.empty-row {
-  text-align: center;
-  color: #777;
-  padding: 18px 0;
+.clients-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
 }
 
-/* =========================== PAGINACIÓN (PLACEHOLDER) =========================== */
-.pagination {
+.client-card {
+  width: 100%;
+  max-width: 900px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid #0077cc;
+  border-radius: 12px;
+  padding: 20px 40px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 16px;
-  margin-top: 12px;
 }
 
-.page-arrow {
-  border: none;
-  background: transparent;
+.client-icon {
+  flex: 0 0 auto;
+  margin-right: 24px;
+
+}
+
+.client-icon mat-icon {
+  font-size: 64px;
+  width: 64px;
+  height: 64px;
+  line-height: 64px;
+}
+
+
+
+.client-info {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.client-name {
   font-size: 18px;
-  cursor: pointer;
+  font-weight: 700;
+  color: #0077cc;
+  margin-bottom: 8px;
 }
 
-.page-arrow:disabled {
-  opacity: 0.4;
-  cursor: default;
+.client-info p {
+  margin: 4px 0;
+  font-size: 14px;
+  color: #444;
 }
 
-.page-info {
-  font-size: 13px;
-  color: #555;
+/* ===========================
+   RESPONSIVE
+   =========================== */
+
+@media (max-width: 600px) {
+  .client-card {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .client-icon {
+    margin: 0 auto 12px;
+  }
 }

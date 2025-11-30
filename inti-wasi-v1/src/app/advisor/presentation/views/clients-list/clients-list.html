@@ -7,13 +7,9 @@
     </div>
 
     <nav class="navbar-center">
-      <a routerLink="/client/profile" class="nav-link">Clientes</a>
-      <a routerLink="/client/simulation-create" class="nav-link">
-        Nueva Simulación
-      </a>
-      <a routerLink="/client/my-simulations" class="nav-link active">
-        Simulaciones Guardadas
-      </a>
+      <a routerLink="/advisor/clients-list" class="nav-link">Clientes</a>
+      <!--<a routerLink="/client/simulation-create" class="nav-link">Nueva Simulación</a>-->
+      <a routerLink="/advisor/pending-simulations" class="nav-link">Resultados de simulaciones</a>
     </nav>
 
     <div class="navbar-right">
@@ -27,36 +23,32 @@
   <main class="saved-main">
     <section class="saved-panel">
       <div class="saved-card">
+        <h2 class="section-title">Listado de Clientes</h2>
 
-        <h2 class="client-list-title">Listado de Clientes</h2>
-        <table class="saved-table">
-          <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>DNI</th>
-            <th>Email</th>
-            <th>Telefono</th>
-            <th>Ingresos Mensuales</th>
-          </tr>
-          </thead>
+        <div class="clients-grid">
+          <div class="client-card" *ngFor="let client of clients">
 
-          <tbody>
-          <tr *ngFor="let cliente of clientes">
-            <td>{{ cliente.nombre }}</td>
-            <td>{{ cliente.dni }}</td>
-            <td>{{ cliente.email }}</td>
-            <td>{{ cliente.telefono }}</td>
-            <td>S/ {{ cliente.ingresos }}</td>
-          </tr>
+            <!-- Ícono a la izquierda -->
+            <div class="client-icon">
+              <mat-icon>account_circle</mat-icon>
+            </div>
 
-          <tr *ngIf="clientes.length === 0">
-            <td colspan="5" class="empty-row">
-              No hay clientes registrados.
-            </td>
-          </tr>
-          </tbody>
-        </table>
+            <!-- Información del cliente -->
+            <div class="client-info">
+              <h3 class="client-name">{{ client.fullName }}</h3>
+              <p><strong>DNI:</strong> {{ client.dni }}</p>
+              <p><strong>Email:</strong> {{ client.email }}</p>
+              <p><strong>Teléfono:</strong> {{ client.phoneNumber }}</p>
+              <p><strong>Ingresos Mensuales:</strong> S/ {{ client.monthlyIncome | number : '1.0-2' }}</p>
+            </div>
 
+            <!-- botones en caso se implementen-->
+          </div>
+
+          <div *ngIf="clients.length === 0" class="empty-row">
+            No hay clientes registrados.
+          </div>
+        </div>
       </div>
     </section>
   </main>

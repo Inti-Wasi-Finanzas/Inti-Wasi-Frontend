@@ -13,8 +13,10 @@ import { AuthStore } from '../../../../auth/application/store/auth-store';
 export class DashboardAdvisorComponent {
   constructor(public authStore: AuthStore) {}
 
-  logout() {
-    this.authStore.logout();
+  logout(): void {
+    if (confirm('¿Estás seguro de que quieres cerrar sesión?')) {
+      this.authStore.logout();
+    }
   }
 }
 
