@@ -64,4 +64,24 @@ export class SimulationsApi extends BaseApi {
   getSchedulePdf(simulationId: number): Observable<Blob> {
     return this.scheduleEndpoint.getSchedulePdf(simulationId);
   }
+
+  getPendingSimulationsByAdvisor(advisorId: number): Observable<Simulation[]> {
+    return this.simulationsEndpoint.getPendingByAdvisor(advisorId).pipe(
+      map((resources: SimulationResource[]) =>
+        this.simulationAssembler.toEntitiesFromResponse(resources)
+      )
+    );
+  }
+
+  approveSimulation(simulationId: number, advisorId: number): Observable<Simulation> {
+    return this.simulationsEndpoint.approve(simulationId, advisorId).pipe(
+      map(res => this.simulationAssembler.toEntityFromResource(res))
+    );
+  }
+
+  rejectSimulation(simulationId: number, advisorId: number, reason: string): Observable<Simulation> {
+    return this.simulationsEndpoint.reject(simulationId, advisorId, reason).pipe(
+      map(res => this.simulationAssembler.toEntityFromResource(res))
+    );
+  }
 }

@@ -49,8 +49,10 @@ export class MySimulationsComponent implements OnInit {
     this.store.loadSimulationsByClient(clientId);
   }
 
-  seeSummary(id: number): void {
-    this.router.navigate(['/simulations/new'], {queryParams: {simulationId: id}}).then();
+  editSimulation(simulationId: number): void {
+    this.router.navigate(['/client/simulation-create'], {
+      queryParams: { simulationId: simulationId }
+    });
   }
 
   delete(id: number): void {

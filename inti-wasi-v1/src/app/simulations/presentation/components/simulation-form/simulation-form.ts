@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -14,7 +14,7 @@ import {
   IncomeProof,
   JobType,
   ProgramaHabitacional,
-  PropertyType,
+  PropertyType, Simulation,
   TypeBond
 } from '../../../domain/model/simulation.entity';
 
@@ -35,6 +35,7 @@ import {
 })
 export class SimulationFormComponent {
 
+  @Input() initialData: Simulation | null = null;
   @Output() submitted = new EventEmitter<any>();
   @Output() formChanged = new EventEmitter<any>();
 
@@ -50,6 +51,13 @@ export class SimulationFormComponent {
   graceTypes: GracePeriodType[] = ['NINGUNO', 'TOTAL', 'PARCIAL'];
 
   form: FormGroup;
+
+  ngOnInit(): void {
+    if (this.initialData) {
+      this.form.patchValue(this.initialData);
+      console.log('Formulario rellenado con:', this.initialData);
+    }
+  }
 
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({

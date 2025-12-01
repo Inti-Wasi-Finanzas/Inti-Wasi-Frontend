@@ -115,11 +115,12 @@
   height: 3.4rem;
 }
 
-.mat-icon {
-  margin: 8px;
-  padding-left: 1rem;
-
+.btn-action {
+  padding: 15px 15px;
+  font-size: 14px;
+  border-radius: 8px;
 }
+
 
 .see-review{
   margin: 8px;

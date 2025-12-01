@@ -26,7 +26,10 @@
     <section class="simulation-panel">
       <div class="left">
         <div class="left-panel">
-          <app-simulation-form (submitted)="onFormSubmit($event)"></app-simulation-form>
+          <app-simulation-form
+            [initialData]="lastSimulation"
+            (submitted)="onFormSubmit($event)">
+          </app-simulation-form>
         </div>
       </div>
 
@@ -50,3 +53,5 @@
   </main>
 
 </div>
+
+
