@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output, OnInit} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -14,7 +14,7 @@ import {
   IncomeProof,
   JobType,
   ProgramaHabitacional,
-  PropertyType, Simulation,
+  PropertyType,
   TypeBond
 } from '../../../domain/model/simulation.entity';
 
@@ -33,13 +33,10 @@ import {
   templateUrl: './simulation-form.html',
   styleUrl: './simulation-form.css'
 })
-export class SimulationFormComponent implements OnInit{
+export class SimulationFormComponent {
 
-  @Input() initialData: Simulation | null = null;
-  @Input() isEditMode = false;
   @Output() submitted = new EventEmitter<any>();
   @Output() formChanged = new EventEmitter<any>();
-  @Output() cancelled = new EventEmitter<void>();
 
   programs: ProgramaHabitacional[] = ['NUEVO_CREDITO_MIVIVIENDA', 'TECHO_PROPIO'];
   currencies: Currency[] = ['SOLES', 'DOLARES'];
@@ -115,26 +112,11 @@ export class SimulationFormComponent implements OnInit{
     this.form.valueChanges.subscribe(v => this.formChanged.emit(v));
   }
 
-  ngOnInit(): void {
-    if (this.initialData) {
-      this.form.patchValue(this.initialData);
-    }
-  }
-
   submit(): void {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
     }
     this.submitted.emit(this.form.value);
-  }
-
-  cancel(): void {
-    this.cancelled.emit();
-  }
-
-  // Cambiar el texto del botón según el modo
-  get submitButtonText(): string {
-    return this.isEditMode ? 'Guardar Cambios' : 'Generar simulación';
   }
 }
