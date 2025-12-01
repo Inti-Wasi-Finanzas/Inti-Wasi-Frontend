@@ -17,6 +17,7 @@ import {
   PropertyType, Simulation,
   TypeBond
 } from '../../../domain/model/simulation.entity';
+import {AuthStore} from '../../../../auth/application/store/auth-store';
 
 
 @Component({
@@ -59,10 +60,12 @@ export class SimulationFormComponent {
     }
   }
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private authStore: AuthStore) {
+    const user = this.authStore.user();
+
     this.form = this.fb.group({
-      clientId: [1, Validators.required],
-      advisorId: [2],
+      clientId: [user?.id ?? null, Validators.required],
+      advisorId: [1, Validators.required],
 
       programName: ['NUEVO_CREDITO_MIVIVIENDA', Validators.required],
       currency: ['SOLES', Validators.required],

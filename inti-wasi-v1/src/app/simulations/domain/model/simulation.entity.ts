@@ -15,7 +15,7 @@ export type GracePeriodType = 'NINGUNO' | 'TOTAL' | 'PARCIAL';
 
 export class Simulation implements BaseEntity {
 
-  // ===== BASE INFO =====
+  //  BASE INFO
 
   private _id: number;
   private _clientId: number;

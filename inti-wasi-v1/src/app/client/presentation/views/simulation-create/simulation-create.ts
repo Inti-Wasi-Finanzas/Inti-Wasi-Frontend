@@ -14,6 +14,7 @@ import {SimulationFormComponent} from '../../../../simulations/presentation/comp
 import {MatIcon} from '@angular/material/icon';
 import {AuthStore} from '../../../../auth/application/store/auth-store';
 import {Subject, takeUntil} from 'rxjs';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-simulation-create',
@@ -37,6 +38,7 @@ export class SimulationCreateComponent implements  OnInit, OnDestroy {
   private readonly authStore = inject(AuthStore);
   private api = inject(SimulationsApi);
   private dialog = inject(MatDialog);
+  private snackBar = inject(MatSnackBar);
 
   private destroy$ = new Subject<void>();
 
@@ -80,22 +82,37 @@ export class SimulationCreateComponent implements  OnInit, OnDestroy {
     });
   }
 
+
+
   onFormSubmit(payload: any): void {
     this.loading = true;
+    this.error = null;
 
-    this.api.createSimulation(payload).subscribe({
+    const user = this.authStore.user(); // viene del AuthStore
+
+    const enrichedPayload = {
+      ...payload,
+      clientId: user?.id ?? null,  // cliente autenticado
+      advisorId: null              // sin asesor asignado, disponible para todos
+    };
+
+    this.api.createSimulation(enrichedPayload).subscribe({
       next: (sim) => {
-        this.lastSimulation = sim;
-        this.loading = false;
-        this.isEditMode = false; // ya no es edición
+        Promise.resolve().then(() => {
+          this.lastSimulation = sim;
+          this.loading = false;
+          this.isEditMode = false;
 
-        alert('Simulación guardada correctamente');
-
-        this.router.navigate(['/client/my-simulations']); // opcional: volver a lista
+          this.snackBar.open('Simulación generada correctamente', 'Cerrar', {
+            duration: 3000
+          });
+        });
       },
       error: (err) => {
-        this.error = err?.message || 'Error al guardar la simulacion';
-        this.loading = false;
+        Promise.resolve().then(() => {
+          this.error = err?.message || 'Error al guardar la simulacion';
+          this.loading = false;
+        });
       }
     });
   }
