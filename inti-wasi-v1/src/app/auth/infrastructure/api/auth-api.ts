@@ -23,11 +23,20 @@ export class AuthApi {
         // Asegúrate de que el backend devuelve un solo role como string
         const role = response.role || 'ROLE_CLIENT'; // Valor por defecto
 
-        return new User({
+        const user = new User({
           id: response.id,
           username: response.username,
           role: role // Usamos un único valor para role
         });
+
+        // Guardamos también el usuario serializado:
+        localStorage.setItem('auth_user', JSON.stringify({
+          id: user.id,
+          username: user.username,
+          role: user.role
+        }));
+
+        return user;
       })
     );
   }
@@ -49,17 +58,26 @@ export class AuthApi {
 
         const role = response.role || 'ROLE_CLIENT'; // Valor por defecto
 
-        return new User({
+        const user = new User({
           id: response.id,
           username: response.username,
           role: role
         });
+
+        localStorage.setItem('auth_user', JSON.stringify({
+          id: user.id,
+          username: user.username,
+          role: user.role
+        }));
+
+        return user;
       })
     );
   }
 
   logout(): void {
     localStorage.removeItem('access_token');
+    localStorage.removeItem('auth_user');
   }
 
   getToken(): string | null {
