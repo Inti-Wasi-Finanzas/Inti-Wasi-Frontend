@@ -39,10 +39,12 @@
           <mat-error>{{ error }}</mat-error>
         }
 
-        <app-simulation-detail
-          [simulation]="lastSimulation"
-          (seeSchedule)="onSeeSchedule($event)">
-        </app-simulation-detail>
+        @if (lastSimulation) {
+          <app-simulation-detail
+            [simulation]="lastSimulation"
+            (seeSchedule)="onSeeSchedule($event)">
+          </app-simulation-detail>
+        }
       </div>
     </section>
   </main>

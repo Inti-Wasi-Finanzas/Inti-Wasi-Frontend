@@ -1,3 +1,81 @@
 mat-card {
   width: 100%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.10);
+  border-radius: 10px;
+  padding: 30px;
+  border: 3px solid #00A1F1; /* Blue border */
+  background-color: #BBDFE7;
+}
+
+.review-panel {
+  width: auto;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  margin: 5px 10px;
+  padding: 0 30px;
+  border: 3px solid #00A1F1; /* Blue border */
+}
+
+
+mat-card-title {
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
+  justify-content: center;
+  margin-top: 1rem;
+  margin-bottom: 15px;
+}
+
+mat-card-content p {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 25px;
+  transition: transform 0.2s ease;
+}
+
+.btn-schedule {
+  background-color: #d9830e; /* Green */
+  color: white;
+}
+
+button:hover {
+  filter: brightness(0.95);
+  transform: scale(1.05);
+  color: #fff;
+  background-color: #FAA434;
+}
+
+button:focus {
+  outline: none;
+}
+
+button.mat-raised-button {
+  width: 45%;
+}
+
+button.mat-raised-button[color="accent"] {
+  background-color: #00bcd4; /* Cyan */
+  color: white;
+}
+
+button.mat-button {
+  background-color: #4caf50; /* Green */
+  color: white;
+  width: 45%;
+}
+
+button.mat-raised-button, button.mat-button {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }

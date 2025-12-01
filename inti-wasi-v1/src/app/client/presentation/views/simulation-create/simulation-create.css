@@ -80,7 +80,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 32px;
-  padding: 45px;
+  padding: 3rem 4.5rem;
 
   border-radius: 16px;
 

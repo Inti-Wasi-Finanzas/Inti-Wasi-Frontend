@@ -1,5 +1,4 @@
-<h2 mat-dialog-title>Cronograma de pagos</h2>
-
+<h2 class="dialog-title" mat-dialog-title align="start">Cronograma de pagos</h2>
 <mat-dialog-content class="dialog-container">
   @if (store.loading()) {
     <mat-progress-spinner diameter="40"></mat-progress-spinner>
@@ -49,6 +48,6 @@
   </table>
 </mat-dialog-content>
 
-<mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Cerrar</button>
+<mat-dialog-actions align="start">
+  <button mat-button mat-dialog-close class="btn-close">Cerrar</button>
 </mat-dialog-actions>

@@ -93,19 +93,34 @@
 .my-simulations-title{
   font-size: 28px;
   font-weight: 700;
-  margin-bottom: 4px;
+  margin-bottom: 2rem;
+  text-align: center;
+  justify-content: center;
 }
 
 .mat-table {
   width: 100%;
+  border: 2px solid ;
+}
+
+.text-actions {
+  text-align: center;
+  justify-content: center;
 }
 
 .actions-cell {
   display: flex;
   gap: 8px;
-
+  height: 3.4rem;
 }
 
+.mat-icon {
+  margin: 8px;
+}
+
+.see-review{
+  margin: 8px;
+}
 
 /* En pantallas pequeñas, una columna */
 @media (max-width: 960px) {
