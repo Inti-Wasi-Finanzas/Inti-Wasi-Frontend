@@ -1,10 +1,19 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {MatSelectModule} from '@angular/material/select';
-import {MatButtonModule} from '@angular/material/button';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  OnInit,
+  OnChanges,
+  SimpleChanges,
+  effect
+} from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
 import {
   Capitalization,
   CivilStatus,
@@ -14,11 +23,11 @@ import {
   IncomeProof,
   JobType,
   ProgramaHabitacional,
-  PropertyType, Simulation,
+  PropertyType,
+  Simulation,
   TypeBond
 } from '../../../domain/model/simulation.entity';
-import {AuthStore} from '../../../../auth/application/store/auth-store';
-
+import {ClientStore} from '../../../../client/application/store/client-store';
 
 @Component({
   selector: 'app-simulation-form',
@@ -34,7 +43,7 @@ import {AuthStore} from '../../../../auth/application/store/auth-store';
   templateUrl: './simulation-form.html',
   styleUrl: './simulation-form.css'
 })
-export class SimulationFormComponent {
+export class SimulationFormComponent implements OnInit, OnChanges {
 
   @Input() initialData: Simulation | null = null;
   @Output() submitted = new EventEmitter<any>();
@@ -53,19 +62,54 @@ export class SimulationFormComponent {
 
   form: FormGroup;
 
+  constructor(
+    private fb: FormBuilder,
+    private clientStore: ClientStore
+  ) {
+    this.form = this.createForm();
+
+    // 👇 Reacciona a los cambios del Signal client()
+    effect(() => {
+      const client = this.clientStore.client();   // Signal → se lee como función
+
+      if (client) {
+        // Solo parcheamos el clientId, sin disparar valueChanges
+        this.form.patchValue(
+          { clientId: client.id },
+          { emitEvent: false }
+        );
+      }
+    });
+
+    // Emitimos cambios del form hacia arriba (por si usas formChanged)
+    this.form.valueChanges.subscribe(v => this.formChanged.emit(v));
+  }
+
   ngOnInit(): void {
+    // Cargar el perfil del cliente autenticado
+    this.clientStore.loadMyProfile();
+
+    // Si vienes en modo edición y ya hay initialData
     if (this.initialData) {
       this.form.patchValue(this.initialData);
-      console.log('Formulario rellenado con:', this.initialData);
+      console.log('Formulario rellenado con initialData:', this.initialData);
     }
   }
 
-  constructor(private fb: FormBuilder, private authStore: AuthStore) {
-    const user = this.authStore.user();
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['initialData'] && this.initialData) {
+      console.log('🔄 initialData cambió, parcheando formulario:', this.initialData);
+      this.form.patchValue(this.initialData);
+    }
+  }
 
-    this.form = this.fb.group({
-      clientId: [user?.id ?? null, Validators.required],
-      advisorId: [1, Validators.required],
+  private createForm(): FormGroup {
+    return this.fb.group({
+      // Este lo llenamos con el ClientStore
+      clientId: [null, Validators.required],
+
+      // El backend ignora advisorId al crear, así que puede ir null
+      advisorId: [null],
 
       programName: ['NUEVO_CREDITO_MIVIVIENDA', Validators.required],
       currency: ['SOLES', Validators.required],
@@ -119,8 +163,6 @@ export class SimulationFormComponent {
       gracePeriodMonths: [0, [Validators.min(0)]],
       dayOfPayment: ['2025-12-05', Validators.required]
     });
-
-    this.form.valueChanges.subscribe(v => this.formChanged.emit(v));
   }
 
   submit(): void {
