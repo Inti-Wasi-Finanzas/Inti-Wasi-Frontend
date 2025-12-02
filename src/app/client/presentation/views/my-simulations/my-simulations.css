@@ -1,0 +1,136 @@
+/* ===========================
+   NAVBAR SUPERIOR
+   =========================== */
+
+.navbar {
+  height: 80px;
+  background-color: #f5a623;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 48px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.navbar-left .logo-text {
+  font-size: 28px;
+  font-weight: 700;
+  color: #000;
+  cursor: pointer;
+}
+
+.navbar-center {
+  display: flex;
+  gap: 48px;
+}
+
+.nav-link {
+  font-size: 18px;
+  color: #000;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 6px 18px;
+  border-radius: 4px;
+  transition: 0.2s ease;
+}
+
+.nav-link:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.nav-link.active {
+  background-color: #000;
+  color: #fff;
+}
+
+.logout-btn {
+  background: transparent;
+  border: none;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+/* aplica el tamaño al icono, no al botón */
+.logout-btn mat-icon {
+  font-size: 26px;
+}
+
+
+/* ===========================
+   LAYOUT GENERAL
+   =========================== */
+
+.my-simulations-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f3f6fb;
+}
+
+/* Fondo con imagen (similar al dashboard) */
+.my-simulations-main {
+  flex: 1;
+  background-image: url('/assets/images/bg-finanzas.png');
+  background-size: cover;
+  background-position: center;
+  padding: 24px 32px 40px;
+}
+
+
+.my-simulations-panel {
+  max-width: 1200px;
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: 1fr;  /* ← SOLO UNA COLUMNA */
+  padding: 32px 40px;
+
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.75);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.1);
+}
+
+.my-simulations-title{
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  text-align: center;
+  justify-content: center;
+}
+
+.mat-table {
+  width: 100%;
+  border: 2px solid ;
+}
+
+.text-actions {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.actions-cell {
+  display: flex;
+  gap: 8px;
+  height: 3.4rem;
+}
+
+.btn-action {
+  padding: 15px 15px;
+  font-size: 14px;
+  border-radius: 8px;
+}
+
+
+.see-review{
+  margin: 8px;
+}
+
+/* En pantallas pequeñas, una columna */
+@media (max-width: 960px) {
+  .my-simulations-panel {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+

@@ -1,0 +1,99 @@
+<div class="my-simulations-container">
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="navbar-left">
+      <span class="logo-text" routerLink="/client/menu-client">Inti Wasi</span>
+    </div>
+
+    <nav class="navbar-center">
+      <a routerLink="/client/profile" class="nav-link">Cliente</a>
+      <a routerLink="/client/simulation-create" class="nav-link">
+        Nueva Simulación
+      </a>
+      <a routerLink="/client/my-simulations" class="nav-link active">
+        Simulaciones Guardadas
+      </a>
+    </nav>
+
+    <div class="navbar-right">
+      <button class="logout-btn" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+      </button>
+    </div>
+  </header>
+
+  <main class="my-simulations-main">
+    <section class="my-simulations-panel">
+      <h2 class="my-simulations-title">Simulaciones guardadas</h2>
+
+      @if (store.loading()) {
+        <mat-progress-spinner diameter="40"></mat-progress-spinner>
+      }
+
+      @if (store.error()) {
+        <mat-error>{{ store.error() }}</mat-error>
+      }
+
+      <table mat-table [dataSource]="store.simulations() ?? []" class="mat-elevation-z8 mat-table">
+
+
+        <!-- ID -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> ID </th>
+          <td mat-cell *matCellDef="let sim"> {{ sim.id }} </td>
+        </ng-container>
+
+        <!-- Programa -->
+        <ng-container matColumnDef="programName">
+          <th mat-header-cell *matHeaderCellDef> Programa </th>
+          <td mat-cell *matCellDef="let sim"> {{ sim.programName }} </td>
+        </ng-container>
+
+        <!-- Propiedad -->
+        <ng-container matColumnDef="propertyName">
+          <th mat-header-cell *matHeaderCellDef> Inmueble </th>
+          <td mat-cell *matCellDef="let sim"> {{ sim.propertyName }} </td>
+        </ng-container>
+
+        <!-- Monto financiado -->
+        <ng-container matColumnDef="amountFinanced">
+          <th mat-header-cell *matHeaderCellDef> Monto financiado </th>
+          <td mat-cell *matCellDef="let sim"> S/ {{ sim.amountFinanced | number:'1.2-2' }} </td>
+        </ng-container>
+
+        <!-- Cuota mensual -->
+        <ng-container matColumnDef="monthlyFee">
+          <th mat-header-cell *matHeaderCellDef> Cuota mensual </th>
+          <td mat-cell *matCellDef="let sim"> S/ {{ sim.monthlyFee | number:'1.2-2' }} </td>
+        </ng-container>
+
+        <!-- Estado -->
+        <ng-container matColumnDef="estado">
+          <th mat-header-cell *matHeaderCellDef> Estado </th>
+          <td mat-cell *matCellDef="let sim"> {{ sim.estado }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Acciones </th>
+          <td mat-cell *matCellDef="let sim" class="actions-cell">
+            <button mat-icon-button color="accent"
+                    (click)="editSimulation(sim.id)"
+                    title="Editar simulación">
+              <mat-icon>edit</mat-icon>
+            </button>
+
+            <button mat-icon-button color="warn"
+                    (click)="delete(sim.id)"
+                    title="Eliminar simulación">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </section>
+  </main>
+</div>
+

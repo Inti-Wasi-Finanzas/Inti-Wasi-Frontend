@@ -1,0 +1,82 @@
+<div class="pending-simulations-container">
+  <!-- NAVBAR SUPERIOR -->
+  <header class="navbar">
+    <div class="navbar-left">
+      <span class="logo-text" routerLink="/advisor/menu-advisor">Inti Wasi</span>
+    </div>
+
+    <nav class="navbar-center">
+      <a routerLink="/advisor/clients-list" class="nav-link">Clientes</a>
+      <a routerLink="/advisor/pending-simulations" class="nav-link active">Resultados de Simulaciones</a>
+    </nav>
+
+    <div class="navbar-right">
+      <button class="logout-btn" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+      </button>
+    </div>
+  </header>
+
+  <main class="pending-main">
+    <section class="pending-panel">
+      <h2 class="title">Simulaciones pendientes</h2>
+
+      @if (store.loading()) {
+        <mat-progress-spinner diameter="50"></mat-progress-spinner>
+      }
+
+      @if (store.error()) {
+        <p class="error">{{ store.error() }}</p>
+      }
+
+      <table class="custom-table" *ngIf="!store.loading()">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Cliente</th>
+          <th>Programa</th>
+          <th>Monto financiado</th>
+          <th>Cuota mensual</th>
+          <th>Fecha</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr *ngFor="let sim of store.pending()">
+          <td>{{ sim.id }}</td>
+          <td>{{ sim.fullName }}</td>
+          <td>{{ sim.programName }}</td>
+          <td>S/ {{ sim.amountFinanced | number:'1.2-2' }}</td>
+          <td>S/ {{ sim.monthlyFee | number:'1.2-2' }}</td>
+          <td>{{ sim.simulationDate }}</td>
+
+          <!-- ESTADO -->
+          <td>
+            <span class="estado-badge" [ngClass]="sim.estado.toLowerCase()">
+              {{ sim.estado }}
+            </span>
+          </td>
+
+          <!-- ICONOS -->
+          <td class="actions-cell">
+            <mat-icon class="action-icon approve"
+                      (click)="approve(sim.id)"
+                      matTooltip="Aprobar">
+              check_circle
+            </mat-icon>
+
+            <mat-icon class="action-icon reject"
+                      (click)="reject(sim.id)"
+                      matTooltip="Rechazar">
+              cancel
+            </mat-icon>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+</div>

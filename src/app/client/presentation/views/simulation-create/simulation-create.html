@@ -1,0 +1,58 @@
+<div class="simulation-container">
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="navbar-left">
+      <span class="logo-text" routerLink="/client/menu-client">Inti Wasi</span>
+    </div>
+
+    <nav class="navbar-center">
+      <a routerLink="/client/profile" class="nav-link">Cliente</a>
+      <a routerLink="/client/simulation-create" class="nav-link active">
+        Nueva Simulación
+      </a>
+      <a routerLink="/client/my-simulations" class="nav-link">
+        Simulaciones Guardadas
+      </a>
+    </nav>
+
+    <div class="navbar-right">
+      <button class="logout-btn" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+      </button>
+    </div>
+  </header>
+
+  <main class="simulation-main">
+    <section class="simulation-panel">
+      <div class="left">
+        <div class="left-panel">
+          <app-simulation-form
+            [initialData]="lastSimulation"
+            [isEditMode]="isEditMode"
+            (submitted)="onFormSubmit($event)">
+          </app-simulation-form>
+        </div>
+      </div>
+
+      <div class="right">
+        @if (loading) {
+          <mat-progress-spinner diameter="40"></mat-progress-spinner>
+        }
+
+        @if (error) {
+          <mat-error>{{ error }}</mat-error>
+        }
+
+        @if (lastSimulation) {
+          <app-simulation-detail
+            [simulation]="lastSimulation"
+            (seeSchedule)="onSeeSchedule($event)">
+          </app-simulation-detail>
+        }
+      </div>
+    </section>
+  </main>
+
+</div>
+
+

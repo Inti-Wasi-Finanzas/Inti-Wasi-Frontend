@@ -1,0 +1,36 @@
+<mat-card *ngIf="simulation; else noSimulation">
+  <mat-card-title>Resumen de simulación</mat-card-title>
+  <div class="review-panel">
+    <mat-card-content>
+      <p><strong>Cliente:</strong> {{ simulation.fullName }} ({{ simulation.dni }})</p>
+      <p><strong>Programa:</strong> {{ simulation.programName }}</p>
+      <p><strong>Propiedad:</strong> {{ simulation.propertyName }}</p>
+      <p><strong>Precio propiedad:</strong> S/ {{ simulation.propertyPrice | number:'1.2-2' }}</p>
+      <p><strong>Monto financiado:</strong> S/ {{ simulation.amountFinanced | number:'1.2-2' }}</p>
+      <p><strong>Cuota mensual:</strong> S/ {{ simulation.monthlyFee | number:'1.2-2' }}</p>
+      <p><strong>VAN:</strong> {{ simulation.van | number:'1.2-2' }}</p>
+      <p><strong>TIR:</strong> {{ simulation.tir | number:'1.2-2' }}</p>
+      <p><strong>TCEA:</strong> {{ simulation.tcea | number:'1.2-2' }} %</p>
+      <p><strong>Estado:</strong> {{ simulation.estado }}</p>
+    </mat-card-content>
+  </div>
+
+  <mat-card-actions>
+    <button mat-button class="btn-schedule" (click)="onSeeSchedule()">Ver cronograma</button>
+
+    <button mat-raised-button class="btn-schedule" (click)="onDownloadPdf(simulation.id)">
+      Generar Cronograma de pagos en PDF
+    </button>
+  </mat-card-actions>
+</mat-card>
+
+<div class="no-review">
+  <ng-template #noSimulation>
+    <mat-card>
+      <mat-card-content>
+        <p>Completa el formulario para ver aquí el resumen de la simulación.</p>
+      </mat-card-content>
+    </mat-card>
+  </ng-template>
+
+</div>

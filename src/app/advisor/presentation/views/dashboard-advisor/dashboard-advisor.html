@@ -1,0 +1,49 @@
+<div class="dashboard-container">
+  <!-- NAVBAR SUPERIOR -->
+  <header class="navbar">
+    <div class="navbar-left">
+      <span class="logo-text">Inti Wasi</span>
+    </div>
+
+    <nav class="navbar-center">
+      <a routerLink="/advisor/clients-list" class="nav-link">Clientes</a>
+      <a routerLink="/advisor/pending-simulations" class="nav-link">Resultados de Simulaciones</a>
+    </nav>
+
+    <div class="navbar-right">
+      <button class="logout-btn" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+      </button>
+    </div>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="dashboard-main">
+    <div class="overlay-panel">
+      <h1 class="title">¡Asesora a tus clientes ya!</h1>
+
+      <div class="cards-container advisor-cards">
+
+        <!-- CARD 1: CLIENTES -->
+        <article class="card">
+          <div class="card-icon">
+            <mat-icon>people</mat-icon>
+          </div>
+          <h3>Clientes</h3>
+          <p>Gestiona y consulta la información de los clientes registrados</p>
+          <button class="btn-ir" routerLink="/advisor/clients-list">Ir</button>
+        </article>
+
+        <!-- CARD 2: RESULTADOS DE SIMULACIONES -->
+        <article class="card">
+          <div class="card-icon">
+            <mat-icon>assessment</mat-icon>
+          </div>
+          <h3>Resultados de Simulaciones</h3>
+          <p>Accede a las simulaciones enviadas por clientes</p>
+          <button class="btn-ir" routerLink="/advisor/pending-simulations">Ir</button>
+        </article>
+      </div>
+    </div>
+  </main>
+</div>

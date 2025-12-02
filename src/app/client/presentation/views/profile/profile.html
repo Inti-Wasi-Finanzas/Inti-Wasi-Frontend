@@ -1,0 +1,129 @@
+<div class="profile-container">
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="navbar-left">
+      <!-- Al hacer clic vuelve al dashboard -->
+      <span class="logo-text" routerLink="/client/menu-client">Inti Wasi</span>
+    </div>
+
+    <nav class="navbar-center">
+      <a routerLink="/client/profile" class="nav-link active">Cliente</a>
+      <a routerLink="/client/simulation-create" class="nav-link">Nueva Simulación</a>
+      <a routerLink="/client/my-simulations" class="nav-link">Simulaciones Guardadas</a>
+    </nav>
+
+    <div class="navbar-right">
+      <button class="logout-btn" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+      </button>
+    </div>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="profile-main">
+    <section class="profile-panel">
+      <div class="profile-card">
+        <h2 class="profile-title">Perfil de Cliente</h2>
+
+        <div class="profile-content">
+          <!-- Icono de perfil -->
+          <div class="profile-image">
+            <div class="image-placeholder">
+              <span class="profile-icon">👤</span>
+            </div>
+          </div>
+
+          <!-- Datos -->
+          <div class="profile-data">
+            <!-- Nombre -->
+            <div class="data-row">
+              <span class="label">Nombre Completo</span>
+              <span class="value" *ngIf="!isEditing; else editFullName">
+                {{ clientStore.client()?.fullName || '-' }}
+              </span>
+            </div>
+            <ng-template #editFullName>
+              <input
+                class="input-edit"
+                type="text"
+                placeholder="Nombre completo"
+                [(ngModel)]="editModel.fullName"
+              />
+            </ng-template>
+
+            <!-- DNI -->
+            <div class="data-row">
+              <span class="label">DNI</span>
+              <span class="value" *ngIf="!isEditing; else editDni">
+                {{ clientStore.client()?.dni || '-' }}
+              </span>
+            </div>
+            <ng-template #editDni>
+              <input
+                class="input-edit"
+                type="text"
+                placeholder="DNI"
+                [(ngModel)]="editModel.dni"
+              />
+            </ng-template>
+
+            <!-- Correo -->
+            <div class="data-row">
+              <span class="label">Correo electrónico</span>
+              <span class="value" *ngIf="!isEditing; else editEmail">
+                {{ clientStore.client()?.email || '-' }}
+              </span>
+            </div>
+            <ng-template #editEmail>
+              <input
+                class="input-edit"
+                type="email"
+                placeholder="correo@ejemplo.com"
+                [(ngModel)]="editModel.email"
+              />
+            </ng-template>
+
+            <!-- Teléfono -->
+            <div class="data-row">
+              <span class="label">Teléfono</span>
+              <span class="value" *ngIf="!isEditing; else editPhone">
+                {{ clientStore.client()?.phone || '-' }}
+              </span>
+            </div>
+            <ng-template #editPhone>
+              <input
+                class="input-edit"
+                type="text"
+                placeholder="Teléfono"
+                [(ngModel)]="editModel.phone"
+              />
+            </ng-template>
+
+            <!-- Ingresos -->
+            <div class="data-row">
+              <span class="label">Ingresos Mensuales</span>
+              <span class="value" *ngIf="!isEditing; else editIncome">
+                {{ clientStore.client()?.monthlyIncome || '-' }}
+              </span>
+            </div>
+            <ng-template #editIncome>
+              <input
+                class="input-edit"
+                type="number"
+                placeholder="S/ 0.00"
+                [(ngModel)]="editModel.monthlyIncome"
+              />
+            </ng-template>
+
+            <!-- Botón -->
+            <div class="edit-button-container">
+              <button class="btn-edit" (click)="onEditClick()">
+                {{ isEditing ? 'Guardar' : 'Editar' }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>

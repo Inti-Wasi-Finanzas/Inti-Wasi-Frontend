@@ -1,0 +1,55 @@
+<div class="clients-list-container">
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="navbar-left">
+      <span class="logo-text" routerLink="/advisor/menu-advisor">Inti Wasi</span>
+    </div>
+
+    <nav class="navbar-center">
+      <a routerLink="/advisor/clients-list" class="nav-link active">Clientes</a>
+      <!--<a routerLink="/client/simulation-create" class="nav-link">Nueva Simulación</a>-->
+      <a routerLink="/advisor/pending-simulations" class="nav-link">Resultados de simulaciones</a>
+    </nav>
+
+    <div class="navbar-right">
+      <button class="logout-btn" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+      </button>
+    </div>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="clients-list-main">
+    <section class="clients-list-panel">
+      <div class="clients-list-card">
+        <h2 class="section-title">Listado de Clientes</h2>
+
+        <div class="clients-grid">
+          <div class="client-card" *ngFor="let client of clientStore.clients()">
+
+            <!-- Ícono a la izquierda -->
+            <div class="client-icon">
+              <mat-icon>account_circle</mat-icon>
+            </div>
+
+            <!-- Información del cliente -->
+            <div class="client-info">
+              <h3 class="client-name">{{ client.fullName }}</h3>
+              <p><strong>DNI:</strong> {{ client.dni }}</p>
+              <p><strong>Email:</strong> {{ client.email }}</p>
+              <p><strong>Teléfono:</strong> {{ client.phone }}</p>
+              <p><strong>Ingresos Mensuales:</strong> S/ {{ client.monthlyIncome | number : '1.0-2' }}</p>
+            </div>
+
+            <!-- botones en caso se implementen-->
+          </div>
+
+          <div *ngIf="clientStore.clients().length === 0" class="empty-row">
+            No hay clientes registrados.
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>

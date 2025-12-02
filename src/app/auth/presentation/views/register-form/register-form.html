@@ -1,0 +1,72 @@
+<div class="register-container">
+  <header class="header">
+    <h1>Inti Wasi</h1>
+  </header>
+
+  <div class="register-card">
+
+    <div class="register-left">
+      <img src="/assets/images/bg-finanzas.png" alt="Registro" />
+    </div>
+
+    <div class="register-right">
+      <h2>Crear Cuenta</h2>
+
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+        <!-- CAMPO: TIPO DE CUENTA (CLIENTE / ASESOR) -->
+        <div class="input-group role-group">
+          <label class="role-label">Tipo de cuenta:</label>
+          <div class="role-options">
+            <label class="role-option" [class.selected]="form.get('role')?.value === 'CLIENT'">
+              <input type="radio" formControlName="role" value="CLIENT" hidden />
+              <span class="checkmark">
+                <mat-icon class="icon">person</mat-icon>
+                Cliente
+              </span>
+            </label>
+
+            <label class="role-option" [class.selected]="form.get('role')?.value === 'ADVISOR'">
+              <input type="radio" formControlName="role" value="ADVISOR" hidden />
+              <span class="checkmark">
+                <mat-icon class="icon">support_agent</mat-icon>
+                Asesor Financiero
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <input
+          type="text"
+          formControlName="username"
+          class="input-field"
+          placeholder="Nombre de usuario"
+        />
+
+
+        <input
+          type="password"
+          formControlName="password"
+          class="input-field"
+          placeholder="Contraseña (mínimo 6 caracteres)"
+        />
+
+        <button type="submit" class="btn-register" [disabled]="form.invalid || loading">
+          <span *ngIf="!loading">Registrarse</span>
+          <mat-spinner diameter="20" *ngIf="loading"></mat-spinner>
+        </button>
+
+        <div class="error-message" *ngIf="error">{{ error }}</div>
+        <div class="success-message" *ngIf="success">
+          ¡Cuenta creadacomo {{ form.get('role')?.value === 'CLIENT' ? 'Cliente' : 'Asesor' }}!
+          <br>Redirigiendo al login...
+        </div>
+
+        <p class="login-text">
+          ¿Ya tienes cuenta?
+          <a class="login-link" routerLink="/auth/login">Iniciar Sesión</a>
+        </p>
+      </form>
+    </div>
+  </div>
+</div>

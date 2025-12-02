@@ -1,0 +1,109 @@
+/* ===========================
+   NAVBAR (estilo general)
+   =========================== */
+
+.navbar {
+  height: 80px;
+  background-color: #f5a623;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 48px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+
+
+.logo-text {
+  font-size: 28px;
+  font-weight: 700;
+  color: #000;
+  cursor: pointer;
+}
+
+.navbar-center {
+  display: flex;
+  gap: 48px;
+}
+
+.nav-link {
+  font-size: 18px;
+  color: #000;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 6px 18px;
+  border-radius: 4px;
+  transition: 0.2s ease;
+}
+
+.nav-link:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.nav-link.active {
+  background-color: #000;
+  color: #fff;
+}
+
+.logout-btn {
+  background: transparent;
+  border: none;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+
+/* ===========================
+   LAYOUT GENERAL
+   =========================== */
+
+.simulation-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f3f6fb;
+}
+
+/* Fondo con imagen (similar al dashboard) */
+.simulation-main {
+  flex: 1;
+  background-image: url('/assets/images/bg-finanzas.png');
+  background-size: cover;
+  background-position: center;
+  padding: 24px 32px 40px;
+}
+
+.simulation-panel {
+  max-width: 1200px;
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  padding: 3rem 4.5rem;
+
+  border-radius: 16px;
+
+  background: rgba(255, 255, 255, 0.75); /* Fondo blanco translúcido */
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.1);
+}
+
+.left-panel {
+  border-radius: 18px;
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.89); /* blanco casi sólido */
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+  border: 3px solid #00A1F1;
+}
+
+.left, .right {
+  min-width: 0;
+}
+
+/* En pantallas pequeñas, una columna */
+@media (max-width: 960px) {
+  .simulation-panel {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "clients": [
+    {
+      "id": 1,
+      "fullName": "Juan Pérez García",
+      "dni": "12345678",
+      "phone": "987654321",
+      "income": 2500,
+      "familyBurden": "2 dependientes",
+      "district": "San Isidro",
+      "jobType": "Dependiente",
+      "status": "Prospecto"
+    }
+  ],
+  "properties": [
+    {
+      "id": 1,
+      "name": "Proyecto: Vivienda Multifamiliar",
+      "price": 135000,
+      "status": "Disponible",
+      "area": 80,
+      "type": "Multifamiliar",
+      "image": "prop1.jpg"
+    }
+  ],
+  "simulations": [
+    {
+      "id": 1,
+      "clientId": 1,
+      "propertyId": 1,
+      "amount": 135000,
+      "termMonths": 240,
+      "tea": 12.5,
+      "gracePeriods": 3,
+      "capitalization": "Mensual",
+      "currency": "PEN",
+      "entity": "Caja Huancayo",
+      "applyBonus": true,
+      "monthlyFee": 1420.50,
+      "tcea": 13.2,
+      "van": 85000,
+      "tir": 11.8,
+      "savedAt": "2025-11-03T10:00:00Z"
+    }
+  ],
+  "config": {
+    "id": 1,
+    "currency": "PEN",
+    "defaultTea": 12.5,
+    "capitalization": "Mensual",
+    "gracePeriods": 3,
+    "entities": [
+      { "id": 1, "name": "Caja Huancayo", "tea": 12.5 },
+      { "id": 2, "name": "Banco de la Nación", "tea": 11.8 }
+    ]
+  }
+}
