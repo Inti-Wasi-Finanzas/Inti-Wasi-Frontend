@@ -1,9 +1,4 @@
 [build]
-# Aquí le dices a Netlify en qué carpeta está el package.json
 base    = "inti-wasi-v1"
-
-# Usa el script "build" del package.json de esa carpeta
 command = "npm run build"
-
-# Ruta de salida del build relativa a esa carpeta
 publish = "dist/inti-wasi-v1/browser"
