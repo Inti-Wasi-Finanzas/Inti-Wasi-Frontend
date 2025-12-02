@@ -26,7 +26,7 @@ export class ClientStore {
   private readonly destroyRef = inject(DestroyRef);
 
   constructor(private clientApi: ClientApi) {
-    //this.loadMyProfile();
+    this.loadMyProfile();
     //this.loadAllClients();
   }
 
