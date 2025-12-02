@@ -1,4 +1,3 @@
 [build]
-base    = "inti-wasi-v1"
-command = "npm run build"
+command = "ng build --configuration production"
 publish = "dist/inti-wasi-v1/browser"
