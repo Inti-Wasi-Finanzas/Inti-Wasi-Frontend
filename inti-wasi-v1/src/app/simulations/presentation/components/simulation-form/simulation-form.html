@@ -312,4 +312,92 @@
       {{ isEditMode ? 'Actualizar información' : 'Generar simulación' }}
     </button>
   </div>
+
+  <!-- ERRORES DE NEGOCIO (a nivel de formulario) -->
+  <div class="business-errors" *ngIf="form.errors as errs">
+    <!-- 1. Condiciones generales -->
+    <mat-error *ngIf="errs['underAge']">
+      Debes ser mayor de {{ errs['underAge'].minAge }} años para solicitar el crédito.
+    </mat-error>
+
+    <mat-error *ngIf="errs['negativeSbs']">
+      No puedes realizar la simulación porque tienes registro negativo en la SBS.
+    </mat-error>
+
+    <mat-error *ngIf="errs['hasOtherProperty']">
+      No cumples la condición porque ya tienes otra propiedad a tu nombre.
+    </mat-error>
+
+    <mat-error *ngIf="errs['receivedBonoBeforeFMV']">
+      No cumples la condición porque ya recibiste un bono habitacional antes (FMV).
+    </mat-error>
+
+    <mat-error *ngIf="errs['debtLimit']">
+      Tus pagos mensuales de deudas superan el {{ (errs['debtLimit'].maxRatio * 100) | number:'1.0-0' }}%
+      del ingreso familiar permitido.
+    </mat-error>
+
+    <!-- 2. Reglas para NUEVO CRÉDITO MIVIVIENDA -->
+    <mat-error *ngIf="errs['mvPriceRange']">
+      Para MiVivienda, el precio del inmueble debe estar entre
+      S/ {{ errs['mvPriceRange'].min | number:'1.2-2' }} y
+      S/ {{ errs['mvPriceRange'].max | number:'1.2-2' }}.
+    </mat-error>
+
+    <mat-error *ngIf="errs['mvIncomeTooLow']">
+      Para MiVivienda, el ingreso familiar debe ser mayor a
+      S/ {{ errs['mvIncomeTooLow'].minIncome | number:'1.2-2' }}.
+    </mat-error>
+
+    <mat-error *ngIf="errs['mvDownPaymentMin']">
+      Para MiVivienda, la cuota inicial mínima es
+      {{ errs['mvDownPaymentMin'].min | number:'1.1-1' }}% del valor del inmueble.
+    </mat-error>
+
+    <!-- 3. Reglas para TECHO PROPIO (generales) -->
+    <mat-error *ngIf="errs['tpIncomeMax']">
+      Para Techo Propio, el ingreso familiar no debe superar
+      S/ {{ errs['tpIncomeMax'].maxIncome | number:'1.2-2' }}.
+    </mat-error>
+
+    <mat-error *ngIf="errs['tpPriceMax']">
+      Para Techo Propio, el precio del inmueble no puede superar
+      S/ {{ errs['tpPriceMax'].maxPrice | number:'1.2-2' }}.
+    </mat-error>
+
+    <!-- 4. Reglas específicas de rangos de precio / ingreso en Techo Propio -->
+    <mat-error *ngIf="errs['tpLowPriceHighIncome']">
+      Para inmuebles de hasta S/
+      {{ errs['tpLowPriceHighIncome'].maxPriceForRange | number:'1.2-2' }},
+      el ingreso familiar no puede ser mayor a
+      S/ {{ errs['tpLowPriceHighIncome'].maxIncomeForRange | number:'1.2-2' }}.
+    </mat-error>
+
+    <mat-error *ngIf="errs['tpIncomeOutOfRange']">
+      Para inmuebles mayores a S/
+      {{ errs['tpIncomeOutOfRange'].minPrice | number:'1.2-2' }}
+      y hasta S/
+      {{ errs['tpIncomeOutOfRange'].maxPrice | number:'1.2-2' }},
+      el ingreso familiar debe estar entre
+      S/ {{ errs['tpIncomeOutOfRange'].minIncome | number:'1.2-2' }} y
+      S/ {{ errs['tpIncomeOutOfRange'].maxIncome | number:'1.2-2' }}.
+    </mat-error>
+
+    <!-- 5. Techo Propio: VIS priorizada -->
+    <mat-error *ngIf="errs['tpVisPriorizadaDownPayment']">
+      Para Techo Propio VIS priorizada, la cuota inicial debe estar entre
+      {{ errs['tpVisPriorizadaDownPayment'].min | number:'1.1-1' }}% y
+      {{ errs['tpVisPriorizadaDownPayment'].max | number:'1.1-1' }}%
+      del valor del inmueble.
+    </mat-error>
+
+    <!-- 6. Techo Propio: VIS regular -->
+    <mat-error *ngIf="errs['tpVisRegularDownPayment']">
+      Para Techo Propio VIS regular, la cuota inicial mínima es de
+      {{ errs['tpVisRegularDownPayment'].min | number:'1.1-1' }}%.
+    </mat-error>
+
+  </div>
+
+
 </form>
