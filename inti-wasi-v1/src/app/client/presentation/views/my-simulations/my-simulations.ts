@@ -50,8 +50,9 @@ export class MySimulationsComponent implements OnInit {
   }
 
   editSimulation(simulationId: number): void {
+    // Navegamos al mismo componente de creación pero en modo edición
     this.router.navigate(['/client/simulation-create'], {
-      queryParams: { simulationId: simulationId }
+      queryParams: { simulationId }
     });
   }
 

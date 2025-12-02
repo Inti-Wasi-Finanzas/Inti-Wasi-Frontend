@@ -46,6 +46,7 @@ import {ClientStore} from '../../../../client/application/store/client-store';
 export class SimulationFormComponent implements OnInit, OnChanges {
 
   @Input() initialData: Simulation | null = null;
+  @Input() isEditMode = false;
   @Output() submitted = new EventEmitter<any>();
   @Output() formChanged = new EventEmitter<any>();
 
@@ -109,7 +110,7 @@ export class SimulationFormComponent implements OnInit, OnChanges {
       clientId: [null, Validators.required],
 
       // El backend ignora advisorId al crear, así que puede ir null
-      advisorId: [null],
+      advisorId: [2],
 
       programName: ['NUEVO_CREDITO_MIVIVIENDA', Validators.required],
       currency: ['SOLES', Validators.required],

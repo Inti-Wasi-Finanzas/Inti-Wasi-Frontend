@@ -12,15 +12,15 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 @Component({
   selector: 'app-pending-simulations',
   standalone: true,
-    imports: [
-      CommonModule,
-      MatTableModule,
-      MatProgressSpinner,
-      MatButtonModule,
-      MatIconModule,
-      RouterLink,
-      MatTooltipModule
-    ],
+  imports: [
+    CommonModule,
+    MatTableModule,
+    MatProgressSpinner,
+    MatButtonModule,
+    MatIconModule,
+    RouterLink,
+    MatTooltipModule
+  ],
   templateUrl: './pending-simulations.html',
   styleUrl: './pending-simulations.css',
 })

@@ -53,12 +53,13 @@ export class SimulationCreateComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe(params => {
         const simulationId = params['simulationId'];
+
         if (simulationId) {
           this.isEditMode = true;
           this.loadSimulation(+simulationId);
         } else {
           this.isEditMode = false;
-          this.lastSimulation = null; // nueva simulación limpia
+          this.lastSimulation = null; // nueva simulación
         }
       });
   }
@@ -88,14 +89,37 @@ export class SimulationCreateComponent implements OnInit, OnDestroy {
     this.loading = true;
     this.error = null;
 
-    // 👈 AQUÍ ya NO tocamos clientId ni advisorId.
-    // El payload viene completo desde el formulario.
+    // 👇 MODO EDICIÓN
+    if (this.isEditMode && this.lastSimulation) {
+
+      this.api.updateSimulation(this.lastSimulation.id, payload).subscribe({
+        next: (sim: Simulation) => {
+          this.loading = false;
+
+          // refrescamos el resumen a la derecha
+          setTimeout(() => {
+            this.lastSimulation = sim;
+          });
+
+          this.snackBar.open('Simulación actualizada correctamente', 'Cerrar', {
+            duration: 3000
+          });
+        },
+        error: (err) => {
+          this.error = err?.message || 'Error al actualizar la simulación';
+          this.loading = false;
+        }
+      });
+
+      return;
+    }
+
+    // 👇 MODO NUEVA SIMULACIÓN (igual que antes)
     this.api.createSimulation(payload).subscribe({
-      next: (sim) => {
+      next: (sim: Simulation) => {
         this.loading = false;
         this.isEditMode = false;
 
-        // Actualizamos el resumen a la derecha
         setTimeout(() => {
           this.lastSimulation = sim;
         });

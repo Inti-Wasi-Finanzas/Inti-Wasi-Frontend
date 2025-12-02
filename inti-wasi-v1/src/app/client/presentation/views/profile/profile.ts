@@ -90,7 +90,7 @@ export class ProfileComponent implements OnInit{
   }
 
 
-    logout() {
+  logout() {
     if (confirm('¿Estás seguro de que quieres cerrar sesión?')) {
       this.authStore.logout();
     }

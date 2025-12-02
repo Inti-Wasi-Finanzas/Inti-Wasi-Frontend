@@ -35,7 +35,13 @@ export class SimulationsApiEndpoint
       .post<SimulationResource>(this.endpointUrl, payload)
       .pipe(map(res => this.assembler.toEntityFromResource(res)));
   }
+  updateRaw(id: number, payload: any) {
+    const url = `${this.endpointUrl}/${id}`;
 
+    return this.http
+      .put<SimulationResource>(url, payload)
+      .pipe(map(res => this.assembler.toEntityFromResource(res)));
+  }
 
   /**
    * GET /api/v1/simulations/advisor/{advisorId}/pending

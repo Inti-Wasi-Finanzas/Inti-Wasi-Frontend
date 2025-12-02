@@ -36,13 +36,13 @@ export class SimulationsApi extends BaseApi {
 
   // AHORA: usamos el payload tal cual (CreateSimulationResource)
   createSimulation(payload: any): Observable<Simulation> {
-    return this.simulationsEndpoint.createRaw(payload).pipe(
-      map(res => new Simulation(res))
-    );
+    // createRaw YA devuelve un Simulation gracias al assembler
+    return this.simulationsEndpoint.createRaw(payload);
   }
 
-  updateSimulation(simulation: Simulation): Observable<Simulation> {
-    return this.simulationsEndpoint.update(simulation, simulation.id);
+  updateSimulation(id: number, payload: any): Observable<Simulation> {
+    // usamos el nuevo updateRaw que hiciste
+    return this.simulationsEndpoint.updateRaw(id, payload);
   }
 
   deleteSimulation(id: number): Observable<void> {

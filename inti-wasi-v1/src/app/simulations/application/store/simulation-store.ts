@@ -84,7 +84,7 @@ export class SimulationStore {
   updateSimulation(simulation: Simulation): void {
     this.loadingSignal.set(true);
     this.errorSignal.set(null);
-    this.simulationsApi.updateSimulation(simulation)
+    this.simulationsApi.updateSimulation(simulation.id, simulation)
       .pipe(retry(1))
       .subscribe({
         next: updated => {
