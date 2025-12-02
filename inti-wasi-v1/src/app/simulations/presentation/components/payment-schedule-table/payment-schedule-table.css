@@ -6,19 +6,20 @@
 }
 
 .dialog-container {
-  width: 95vh;
-  max-height: 55vh;
-  overflow: auto;
+  width: 105vh;
+  max-height: 65vh;
+  overflow: visible;
 }
 
 .dialog-title {
-  margin: 0.5rem 2rem;
+  white-space: nowrap;
+  margin-left: 25rem;
   font-weight: bold;
   font-size: 24px;
 }
 
 .btn-close {
-  margin: 1rem 2rem;
+  margin:1rem 2rem -2rem;
   background-color: #d9830e;
   color: white;
 }

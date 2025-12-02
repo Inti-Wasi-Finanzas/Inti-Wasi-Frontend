@@ -31,11 +31,16 @@ export class PaymentScheduleTable implements OnInit {
   displayedColumns: string[] = [
     'installmentNumber',
     'dueDate',
+    'teaAnnual',
+    'tepPeriod',
     'beginningBalance',
     'interest',
     'installmentWithSegDes',
     'amortization',
-    'endingBalance'
+    'seguroDesgravamen',
+    'comision',
+    'endingBalance',
+    'flujo'
   ];
 
   constructor(

@@ -1,4 +1,11 @@
-<h2 class="dialog-title" mat-dialog-title align="start">Cronograma de pagos</h2>
+
+<div class="dialog-header">
+  <mat-dialog-actions align="start">
+    <button mat-button mat-dialog-close class="btn-close">Cerrar</button>
+  </mat-dialog-actions>
+  <h2 class="dialog-title" mat-dialog-title >Cronograma de pagos</h2>
+</div>
+
 <mat-dialog-content class="dialog-container">
   @if (store.loading()) {
     <mat-progress-spinner diameter="40"></mat-progress-spinner>
@@ -16,6 +23,16 @@
     <ng-container matColumnDef="dueDate">
       <th mat-header-cell *matHeaderCellDef> Fecha </th>
       <td mat-cell *matCellDef="let row"> {{ row.dueDate | date:'dd/MM/yyyy' }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="teaAnnual">
+      <th mat-header-cell *matHeaderCellDef> TEA/TNA </th>
+      <td mat-cell *matCellDef="let row"> {{ row.teaAnnual | number:'1.2-2' }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="tepPeriod">
+      <th mat-header-cell *matHeaderCellDef> TEP </th>
+      <td mat-cell *matCellDef="let row"> {{ row.tepPeriod | number:'1.2-2' }} </td>
     </ng-container>
 
     <ng-container matColumnDef="beginningBalance">
@@ -38,9 +55,24 @@
       <td mat-cell *matCellDef="let row"> {{ row.amortization | number:'1.2-2' }} </td>
     </ng-container>
 
+    <ng-container matColumnDef="seguroDesgravamen">
+      <th mat-header-cell *matHeaderCellDef> Seguro de Desgravamen </th>
+      <td mat-cell *matCellDef="let row"> {{ row.seguroDesgravamen | number:'1.2-2' }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="comision">
+      <th mat-header-cell *matHeaderCellDef> Comision </th>
+      <td mat-cell *matCellDef="let row"> {{ row.comision | number:'1.2-2' }} </td>
+    </ng-container>
+
     <ng-container matColumnDef="endingBalance">
       <th mat-header-cell *matHeaderCellDef> Saldo Final </th>
       <td mat-cell *matCellDef="let row"> {{ row.endingBalance | number:'1.2-2' }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="flujo">
+      <th mat-header-cell *matHeaderCellDef> Flujo </th>
+      <td mat-cell *matCellDef="let row"> {{ row.flujo | number:'1.2-2' }} </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -48,6 +80,3 @@
   </table>
 </mat-dialog-content>
 
-<mat-dialog-actions align="start">
-  <button mat-button mat-dialog-close class="btn-close">Cerrar</button>
-</mat-dialog-actions>
